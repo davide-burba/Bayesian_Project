@@ -12,26 +12,55 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## IMPORTAZIONE DATI
 
-\textcolor{red}{PROVA}
 
 ```{r include=FALSE}
-setwd("~/Documents/universita/bayesian_statistics-Guglielmi/GLAUCOMA_PROJECT/src")
+
+setwd("~/Documents/universita/bayesian_statistics-Guglielmi/GLAUCOMA_PROJECT/src/analisi_exp_markdown/")
 
 ##################################################################
 ####################### LOADING DATA  ############################
 ##################################################################
 
 
-Gdata=read.table("../data/data.csv", header=T,fill=T,sep=",")
-dim(Gdata)
+# Gdata=read.table("../../data/data.csv", header=T,fill=T,sep=",")
+# 
+# 
+# attach(Gdata)
+# 
+# # BUILDING A TIME VARIABLE (MINIMUM AGE=0 for each patient)
+# time= numeric(506)
+# for (i in unique(Patient))
+# {
+#   tmp=Gdata[Patient==i,]
+#   index=which(Patient==i)
+#   minage=min(tmp$Age)
+#   time[index]=tmp$Age-minage
+# }
+# 
+# #adding time to Gdata
+# Gdata=cbind(Gdata,time)
+# Gdata$time
+# 
+# 
+# length(Patient[Patient==0]) # c'è un' osservazione strana, probabile errore
+# Gdata[ Patient==0,] # quasi tutto NA -> rimuoviamola per ora
+# Gdata=Gdata[ Patient!=0,]
+# 
+# 
+# #Save the data.frame
+# save (Gdata, file="../../R_object/Glaucoma_data.RData")
+
+load("../../R_object/Glaucoma_data.RData")
 
 attach(Gdata)
+
+
+
+
+dim(Gdata)
 length(unique(Patient)) # 55 pazienti
-length(Patient[Patient==0]) # c'è un' osservazione strana, probabile errore
-Gdata[ Patient==0,] # quasi tutto NA -> rimuoviamola per ora
-Gdata=Gdata[ Patient!=0,]
+
 ```
 
 ## EXPLORATORY ANALYSIS
@@ -48,7 +77,8 @@ library(ggplot2)
 # patient
 ggplot(data= Gdata, aes(factor(Patient), fill=1) ) + 
   geom_bar()+
-  theme(legend.position = "none", axis.text.x  = element_text(angle=90, hjust=1, vjust=0.9)) 
+  theme(legend.position = "none", axis.text.x  = element_text(angle=90, hjust=1, vjust=0.9)) +
+  geom_hline(yintercept = mean(mean(table(Patient))), color="red")
 
 ```
 
@@ -66,10 +96,8 @@ quantile(table(Patient),0.75)
 - 0.75 quantile: 11
 
 
-
-
-
 ##
+
 - female vs male
 
 ```{r echo=FALSE, fig.height=4, fig.width=4}
@@ -126,18 +154,11 @@ ggplot(data= Gdata, aes(factor(Periph), fill=factor(Periph) ) ) +
 
 
 
-## A UNIQUE PATIENT
-
-Some variables: 
 
 ```{r include=FALSE, fig.height=2, fig.width=6}
 
 
-
-
-
-
-###### Proviamo a visualizzare un unico paziente
+###### Proviamo a "visualizzare" un unico paziente
 
 Paz=590
 Gdata_paz=Gdata[Patient==Paz,]
@@ -194,7 +215,7 @@ Gdata_paz$rim_volume
 
 
 #MODIFICHE FUNZIONALI 
-Gdata_paz$MD# Deviazione media CAMPO VISIVO!
+Gdata_paz$MD # Deviazione media CAMPO VISIVO!
 Gdata_paz$PSD #Pattern Standard Deviation, nel perimetro Humphrey
 
 ```
@@ -202,101 +223,78 @@ Gdata_paz$PSD #Pattern Standard Deviation, nel perimetro Humphrey
 
 
 
-```{r echo=FALSE, fig.height=2, fig.width=6}
+## RNFL average
 
-# Evolution of PSD in time for a single patient
-ggplot(data= Gdata_paz, aes(Age, PSD)) +
-  geom_line(color = "black") 
-```
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
+```{r echo=FALSE , fig.height=4, fig.width=8,  message=FALSE, warning=FALSE}
 
-# Evolution of RNFL_average in time for a single patient
-ggplot(data= Gdata_paz, aes(Age, RNFL_average)) +
-  geom_line(color = "black")
-```
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
-#Evaluation of MD
-ggplot(data= Gdata_paz, aes(Age, MD)) +
-  geom_line(color = "black")
+## define base for the graphs and store in object 'p'
+p <- ggplot(data = Gdata[!is.na(RNFL_average),], aes(x = time, y = RNFL_average, group = Patient, color= factor(Patient) )  )
+
+## just plotting points (a.k.a., scatterplot)
+#p 
+
+p + geom_line() + geom_point() +
+     stat_smooth(aes(group = 1)) 
+
 
 ```
 
 
-##
+## RNFL average
 
+- By Sex
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
-#Let's see if the progression variables ; NB: progression and progressionstructure should be absorbing
-ggplot(data= Gdata_paz, aes(Age, Progression)) +
-  geom_line(color = "black")
+```{r echo=FALSE , fig.height=2, fig.width=6 ,  message=FALSE, warning=FALSE}
 
-```
+p3 <- ggplot(data = Gdata[!is.na(RNFL_average) &!is.na(Sex),], aes(x = time, y = RNFL_average, group = Patient, color= factor(Patient) )  )
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
-
-ggplot(data= Gdata_paz, aes(Age, Progression1)) +
-  geom_line(color = "black")
-
-```
-
-```{r echo=FALSE , fig.height=2, fig.width=6}
-ggplot(data= Gdata_paz, aes(Age, ProgressionStructure)) +
-  geom_line(color = "black")
-```
-
-```{r echo=FALSE , fig.height=2, fig.width=6}
-
-ggplot(data= Gdata_paz, aes(Age, ProgressionStructure1)) +
-  geom_line(color = "black")
+p3 + geom_line() + geom_point() +
+     stat_smooth(aes(group = 1))  +
+     stat_summary(aes(group = 1), fun.y = mean, shape = 17, size = 0.5) + facet_grid(. ~ Sex)
 
 ```
 
 
-## ALL THE PATIENTS
+## RNFL average
+
+- Only POAG Glaucoma
+
+```{r echo=FALSE , fig.height=2, fig.width=6 ,  message=FALSE, warning=FALSE}
 
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
+p4=ggplot(data = Gdata[Type_of_glaucoma=="POAG",], aes(x = time, y = RNFL_average, group = Patient, color= factor(Patient)))
 
-#all the patient-> doesn't work
-#ggplot(data= Gdata, aes(Age, RNFL_average, color= Patient)) +
- # geom_smooth(method = "loess", span = 1/2, se = FALSE)
-
-
-#Plot of all th patients , RNFL
-tmp=Gdata[Patient==502,]
-minage=min(tmp$Age)
-plot(x=tmp$Age-minage, y=tmp$RNFL_average, col=502, type="l",xlim=c(0,10), ylim=c(0,150))
-for (i in factor(Patient))
-{
-  tmp=Gdata[Patient==i,]
-  minage=min(tmp$Age)
-  points(x=tmp$Age-minage, y=tmp$RNFL_average, col=i, type="l")
-}
+p4 + geom_line() + geom_point() +
+     stat_smooth(aes(group = 1))  +
+     stat_summary(aes(group = 1), fun.y = mean, shape = 17, size = 0.5) 
 
 ```
 
-```{r echo=FALSE , fig.height=2, fig.width=6}
-#Plot of all th patients , MD
-tmp=Gdata[Patient==502,]
-minage=min(tmp$Age)
-plot(x=tmp$Age-minage, y=tmp$MD, col=502, type="l", ylim=c(-5,5))
-for (i in factor(Patient))
-{
-  tmp=Gdata[Patient==i,]
-  minage=min(tmp$Age)
-  points(x=tmp$Age-minage, y=tmp$MD, col=i, type="l")
-}
-```
+## PROGRESSION
 
+
+```{r echo=FALSE , fig.height=4, fig.width=8,  message=FALSE, warning=FALSE}
+
+
+## define base for the graphs and store in object 'p'
+p5 <- ggplot(data = Gdata[!is.na(ProgressionStructure),], aes(x = time, y = ProgressionStructure, group = Patient, color= factor(Patient) )  )
+
+## just plotting points (a.k.a., scatterplot)
+#p 
+
+p5 + geom_line() + geom_point()
+
+#fa cagare
+```
 
 
 
 ##TODO: 
--   Plot decenti di tutti i pazienti
 -   Plot e analisi esplorativa altre variabili
 -   Riempire dati mancanti
+
 
 
  
