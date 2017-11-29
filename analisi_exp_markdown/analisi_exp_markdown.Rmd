@@ -1,6 +1,22 @@
+---
+title: "Glaucoma Structural Progression"
+author: "Davide Burba, Matteo Muffo"
+date: "December 1, 2017"
+output: 
+  beamer_presentation:
+    keep_tex: yes
+    theme: Warsaw
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
+## IMPORTAZIONE DATI
 
+\textcolor{red}{PROVA}
+
+```{r include=FALSE}
 setwd("~/Documents/universita/bayesian_statistics-Guglielmi/GLAUCOMA_PROJECT/src")
 
 ##################################################################
@@ -16,8 +32,13 @@ length(unique(Patient)) # 55 pazienti
 length(Patient[Patient==0]) # c'è un' osservazione strana, probabile errore
 Gdata[ Patient==0,] # quasi tutto NA -> rimuoviamola per ora
 Gdata=Gdata[ Patient!=0,]
+```
+
+## EXPLORATORY ANALYSIS
+- Number of visits per patient
 
 
+```{r echo=FALSE, fig.height=4, fig.width=14}
 ##################################################################
 ##################### DATA VISUALIZATION  ########################
 ##################################################################
@@ -28,24 +49,52 @@ library(ggplot2)
 ggplot(data= Gdata, aes(factor(Patient), fill=1) ) + 
   geom_bar()+
   theme(legend.position = "none", axis.text.x  = element_text(angle=90, hjust=1, vjust=0.9)) 
+
+```
+
+```{r include=FALSE}
 #numero visite per paziente:
 N=mean(table(Patient))
 N
 quantile(table(Patient),0.25)
 quantile(table(Patient),0.5)
 quantile(table(Patient),0.75)
+```
+- Mean number of observations: 9.2
+- 0.25 quantile: 9
+- 0.50 quantile: 11
+- 0.75 quantile: 11
+
+
+
+
+
+##
+- female vs male
+
+```{r echo=FALSE, fig.height=4, fig.width=4}
 
 #female vs male
 ggplot(data= Gdata, aes(Sex, fill=Sex  ) ) + 
   geom_bar()+
   theme(legend.position = "none", axis.text.x  = element_text(angle=0, hjust=1, vjust=0.9)) 
+```
+
+##
+- type of glaucoma
+
+```{r echo=FALSE , fig.height=4, fig.width=4}
 
 # type of glaucoma
 ggplot(data= Gdata, aes(Type_of_glaucoma, fill=Type_of_glaucoma  ) ) + 
   geom_bar()+
   theme(legend.position = "none", axis.text.x  = element_text(angle=0.45, hjust=1, vjust=0.9)) 
 
+```
 
+```{r eval=FALSE, include=FALSE}
+
+### NOT SURE THOSE ARE IMPORTANT -> HIDDEN AT THIS MOMENT
 
 # sup_10thpercent
 ggplot(data= Gdata, aes( sup_10thpercent )  ) + 
@@ -73,6 +122,21 @@ ggplot(data= Gdata, aes(factor(Periph), fill=factor(Periph) ) ) +
   geom_bar()+
   theme(legend.position = "none", axis.text.x  = element_text(angle=0, hjust=1, vjust=0.9)) 
 
+```
+
+
+
+## A UNIQUE PATIENT
+
+Some variables: 
+
+```{r include=FALSE, fig.height=2, fig.width=6}
+
+
+
+
+
+
 ###### Proviamo a visualizzare un unico paziente
 
 Paz=590
@@ -96,6 +160,8 @@ Gdata_paz$MAP
 Gdata_paz$FieldsComment
 Gdata_paz$Field2
 Gdata_paz$acuity
+
+
 
 
 
@@ -131,40 +197,71 @@ Gdata_paz$rim_volume
 Gdata_paz$MD# Deviazione media CAMPO VISIVO!
 Gdata_paz$PSD #Pattern Standard Deviation, nel perimetro Humphrey
 
+```
 
 
+
+
+```{r echo=FALSE, fig.height=2, fig.width=6}
 
 # Evolution of PSD in time for a single patient
 ggplot(data= Gdata_paz, aes(Age, PSD)) +
   geom_line(color = "black") 
+```
+
+```{r echo=FALSE , fig.height=2, fig.width=6}
 
 # Evolution of RNFL_average in time for a single patient
 ggplot(data= Gdata_paz, aes(Age, RNFL_average)) +
   geom_line(color = "black")
+```
 
+```{r echo=FALSE , fig.height=2, fig.width=6}
 #Evaluation of MD
 ggplot(data= Gdata_paz, aes(Age, MD)) +
   geom_line(color = "black")
 
+```
+
+
+##
+
+
+```{r echo=FALSE , fig.height=2, fig.width=6}
 #Let's see if the progression variables ; NB: progression and progressionstructure should be absorbing
 ggplot(data= Gdata_paz, aes(Age, Progression)) +
   geom_line(color = "black")
 
+```
+
+```{r echo=FALSE , fig.height=2, fig.width=6}
+
 ggplot(data= Gdata_paz, aes(Age, Progression1)) +
   geom_line(color = "black")
 
+```
+
+```{r echo=FALSE , fig.height=2, fig.width=6}
 ggplot(data= Gdata_paz, aes(Age, ProgressionStructure)) +
   geom_line(color = "black")
+```
 
-ggplot(data= Gdata_paz, aes(Age), ProgressionStructure1)) +
+```{r echo=FALSE , fig.height=2, fig.width=6}
+
+ggplot(data= Gdata_paz, aes(Age, ProgressionStructure1)) +
   geom_line(color = "black")
 
+```
 
 
+## ALL THE PATIENTS
+
+
+```{r echo=FALSE , fig.height=2, fig.width=6}
 
 #all the patient-> doesn't work
-ggplot(data= Gdata, aes(Age, RNFL_average, color= Patient)) +
-  geom_smooth(method = "loess", span = 1/2, se = FALSE)
+#ggplot(data= Gdata, aes(Age, RNFL_average, color= Patient)) +
+ # geom_smooth(method = "loess", span = 1/2, se = FALSE)
 
 
 #Plot of all th patients , RNFL
@@ -178,7 +275,9 @@ for (i in factor(Patient))
   points(x=tmp$Age-minage, y=tmp$RNFL_average, col=i, type="l")
 }
 
+```
 
+```{r echo=FALSE , fig.height=2, fig.width=6}
 #Plot of all th patients , MD
 tmp=Gdata[Patient==502,]
 minage=min(tmp$Age)
@@ -189,11 +288,18 @@ for (i in factor(Patient))
   minage=min(tmp$Age)
   points(x=tmp$Age-minage, y=tmp$MD, col=i, type="l")
 }
+```
 
 
-# TODO: 
-#       Leggere papers e cerca HMM-> guarda che modello (0/1 o RNFL?)
-#       modello
-#       Riempire dati mancanti
 
+
+##TODO: 
+-   Plot decenti di tutti i pazienti
+-   Plot e analisi esplorativa altre variabili
+-   Riempire dati mancanti
+
+
+ 
+ 
+ 
  
