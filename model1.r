@@ -69,7 +69,7 @@ inits = function() {list(beta1=0, beta2=rep(0,102), sigma=5)} # fixed intercept,
 
 modelRegress=jags.model("data1.bug",data=data,inits=inits,n.adapt=1000,n.chains=1)
 update(modelRegress,n.iter=19000)
-variable.names=c("beta", "sigma")
+variable.names=c("beta1","beta2", "sigma")
 n.iter=50000 
 thin=10 
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
@@ -88,16 +88,12 @@ n.chain
 summary(data.out)
 head(data.out)
 
-beta.post <- data.out[,1:2]
+beta.post <- data.out
 beta.bayes  <- apply(beta.post,2,"mean")
-beta.bayes
+beta2.bayes=beta.bayes[2:103]
+hist(beta2.bayes)
 
-sig.post= data.out[,'sigma']
 
-y1=primi[,1]; x1=primi[,2];
-pippo= lm(y1 ~ x1)
-summary(pippo)
 
-pippo$coefficients
-beta.bayes
+
 
