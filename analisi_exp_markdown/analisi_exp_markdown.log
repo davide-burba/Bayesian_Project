@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.23)  29 NOV 2017 16:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.23)  30 NOV 2017 11:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -998,6 +998,10 @@ Package: beamercolorthemeorchid 2010/06/17  (rcs-revision d02a7cf4d8ae)
 emewhale.sty
 Package: beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
 ))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/beamer/themes/color/beamercolorth
+emeseahorse.sty
+Package: beamercolorthemeseahorse 2010/06/17  (rcs-revision d02a7cf4d8ae)
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
@@ -1179,7 +1183,7 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 ))
-Package hyperref Info: Option `breaklinks' set `true' on input line 34.
+Package hyperref Info: Option `breaklinks' set `true' on input line 35.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grffile.sty
 Package: grffile 2012/04/05 v1.16 Extended file name support for graphics (HO)
@@ -1191,28 +1195,28 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
 (./analisi_exp_markdown.aux)
 \openout1 = `analisi_exp_markdown.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 80.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 81.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 80.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 81.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1281,7 +1285,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 80.
+Package hyperref Info: Link coloring OFF on input line 81.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1291,60 +1295,60 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count161
 )
-LaTeX Info: Redefining \ref on input line 80.
-LaTeX Info: Redefining \pageref on input line 80.
-LaTeX Info: Redefining \nameref on input line 80.
+LaTeX Info: Redefining \ref on input line 81.
+LaTeX Info: Redefining \pageref on input line 81.
+LaTeX Info: Redefining \nameref on input line 81.
 
 (./analisi_exp_markdown.out) (./analisi_exp_markdown.out)
 \@outlinefile=\write5
 \openout5 = `analisi_exp_markdown.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 80.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 81.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 80.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 81.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 80.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 81.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 80.
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 81.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 80.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 80.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 81.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 80.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 80.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 80.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 81.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 80.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 80.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 80.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 81.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 80.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 80.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 80.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 81.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 80.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 80.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 81.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 80.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 81.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 80.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 80.
+(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 80.
+(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 80.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 80.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 81.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 80.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 81.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/beamer/translator/dicts/translato
 r-basic-dictionary/translator-basic-dictionary-English.dict
@@ -1370,8 +1374,8 @@ Dictionary: translator-numbers-dictionary, Language: English
 r-theorem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 80.
-LaTeX Info: Redefining \microtypecontext on input line 80.
+LaTeX Info: Redefining \includegraphics on input line 81.
+LaTeX Info: Redefining \microtypecontext on input line 81.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1388,155 +1392,221 @@ Package microtype Info: Loading generic settings for font family
 
 (./analisi_exp_markdown.nav) [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
-
-]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-2-1.pdf, id=43, 1000.73
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-2-1.pdf, id=35, 1000.73
 875pt x 280.04625pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-2-1.pdf Graphic fi
 le (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--2-1.pdf used on input line 111.
+-2-1.pdf used on input line 106.
 (pdftex.def)             Requested size: 307.29396pt x 85.99298pt.
- [3
+ [2
 
  <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-2-1.pdf>]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-4-1.pdf, id=57, 278.038
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-4-1.pdf, id=51, 278.038
 76pt x 279.0425pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-4-1.pdf Graphic fi
 le (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-4-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--4-1.pdf used on input line 123.
+-4-1.pdf used on input line 118.
 (pdftex.def)             Requested size: 205.4103pt x 206.15184pt.
- [4
+ [3
 
  <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-4-1.pdf>]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-5-1.pdf, id=71, 278.038
-76pt x 279.0425pt>
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-5-1.pdf, id=65, 1000.73
+875pt x 279.0425pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-5-1.pdf Graphic fi
 le (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--5-1.pdf used on input line 135.
-(pdftex.def)             Requested size: 205.4103pt x 206.15184pt.
- [5
+-5-1.pdf used on input line 130.
+(pdftex.def)             Requested size: 307.29396pt x 85.68477pt.
+ [4
 
  <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-5-1.pdf>]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-8-1.pdf, id=85, 423.582
-5pt x 134.5025pt>
-File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-8-1.pdf Graphic fi
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-6-1.pdf, id=79, 473.77p
+t x 346.29375pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-6-1.pdf Graphic fi
 le (type pdf)
 
-<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-8-1.pdf>
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-6-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--8-1.pdf used on input line 147.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-6-1.pdf used on input line 136.
+(pdftex.def)             Requested size: 282.03761pt x 206.15036pt.
+ [5
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf, id=86, 423.582
-5pt x 135.50626pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-6-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf, id=93, 562.1pt
+ x 289.08pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf Graphic fi
 le (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--9-1.pdf used on input line 147.
-(pdftex.def)             Requested size: 307.2995pt x 98.3067pt.
+-9-1.pdf used on input line 143.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-10-1.pdf, id=87, 423.58
-25pt x 134.5025pt>
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-2.pdf, id=94, 562.1pt
+ x 289.08pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-2.pdf Graphic fi
+le (type pdf)
+
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-2.pdf>
+Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
+-9-2.pdf used on input line 143.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+
+Overfull \hbox (307.28249pt too wide) in paragraph at lines 143--143
+[][][]  
+ []
+
+[6
+
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf> <./analisi_
+exp_markdown_files/figure-beamer/unnamed-chunk-9-2.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-10-1.pdf, id=121, 706.6
+4pt x 351.3125pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-10-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--10-1.pdf used on input line 147.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-10-1.pdf used on input line 155.
+(pdftex.def)             Requested size: 307.28888pt x 152.77145pt.
+ [7
 
-Overfull \vbox (90.52109pt too high) detected at line 147
- []
-
-[6
-
- <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-8-1.pdf> <./analisi_
-exp_markdown_files/figure-beamer/unnamed-chunk-9-1.pdf> <./analisi_exp_markdown
-_files/figure-beamer/unnamed-chunk-10-1.pdf>]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf, id=115, 423.5
-825pt x 134.5025pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-10-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf, id=139, 706.6
+4pt x 351.3125pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--11-1.pdf used on input line 159.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-11-1.pdf used on input line 167.
+(pdftex.def)             Requested size: 307.28888pt x 152.77145pt.
+ [8
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf, id=116, 423.5
-825pt x 134.5025pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf, id=156, 562.1
+pt x 289.08pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--12-1.pdf used on input line 159.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-12-1.pdf used on input line 174.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-13-1.pdf, id=117, 423.5
-825pt x 134.5025pt>
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-2.pdf, id=157, 562.1
+pt x 289.08pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-2.pdf Graphic f
+ile (type pdf)
+
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-2.pdf>
+Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
+-12-2.pdf used on input line 174.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+
+Overfull \hbox (307.28249pt too wide) in paragraph at lines 174--174
+[][][]  
+ []
+
+[9
+
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf> <./analisi
+_exp_markdown_files/figure-beamer/unnamed-chunk-12-2.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-13-1.pdf, id=185, 706.6
+4pt x 351.3125pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-13-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--13-1.pdf used on input line 159.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-13-1.pdf used on input line 186.
+(pdftex.def)             Requested size: 307.28888pt x 152.77145pt.
+ [10
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-14-1.pdf, id=118, 423.5
-825pt x 134.5025pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-13-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-14-1.pdf, id=202, 562.1
+pt x 289.08pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-14-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-14-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--14-1.pdf used on input line 159.
-(pdftex.def)             Requested size: 307.2995pt x 97.57849pt.
+-14-1.pdf used on input line 192.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [11
 
-Overfull \vbox (151.63379pt too high) detected at line 159
- []
-
-[7
-
- <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-11-1.pdf> <./analisi
-_exp_markdown_files/figure-beamer/unnamed-chunk-12-1.pdf> <./analisi_exp_markdo
-wn_files/figure-beamer/unnamed-chunk-13-1.pdf> <./analisi_exp_markdown_files/fi
-gure-beamer/unnamed-chunk-14-1.pdf>]
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf, id=154, 401.5
-pt x 118.4425pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-14-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf, id=219, 562.1
+pt x 289.08pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--15-1.pdf used on input line 167.
-(pdftex.def)             Requested size: 307.3119pt x 90.657pt.
+-15-1.pdf used on input line 198.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [12
 
-<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf, id=155, 401.5
-pt x 87.32625pt>
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf, id=236, 562.1
+pt x 289.08pt>
 File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf Graphic f
 ile (type pdf)
 
 <use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf>
 Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
--16-1.pdf used on input line 167.
-(pdftex.def)             Requested size: 307.3119pt x 66.84033pt.
- [8
+-16-1.pdf used on input line 204.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [13
 
- <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-15-1.pdf> <./analisi
-_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf>] [9
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-17-1.pdf, id=254, 562.1
+pt x 289.08pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-17-1.pdf Graphic f
+ile (type pdf)
+
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
+-17-1.pdf used on input line 210.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [14
+
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-17-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-18-1.pdf, id=271, 562.1
+pt x 289.08pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-18-1.pdf Graphic f
+ile (type pdf)
+
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
+-18-1.pdf used on input line 216.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [15
+
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-18-1.pdf>]
+<analisi_exp_markdown_files/figure-beamer/unnamed-chunk-19-1.pdf, id=288, 562.1
+pt x 289.08pt>
+File: analisi_exp_markdown_files/figure-beamer/unnamed-chunk-19-1.pdf Graphic f
+ile (type pdf)
+
+<use analisi_exp_markdown_files/figure-beamer/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: analisi_exp_markdown_files/figure-beamer/unnamed-chunk
+-19-1.pdf used on input line 222.
+(pdftex.def)             Requested size: 307.28618pt x 158.03288pt.
+ [16
+
+ <./analisi_exp_markdown_files/figure-beamer/unnamed-chunk-19-1.pdf>] [17
+
+] [18
 
 ]
 \tf@nav=\write6
@@ -1548,32 +1618,32 @@ _exp_markdown_files/figure-beamer/unnamed-chunk-16-1.pdf>] [9
 \tf@snm=\write8
 \openout8 = `analisi_exp_markdown.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 183.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 183.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
 
 (./analisi_exp_markdown.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 183.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 183.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
 Package rerunfilecheck Info: File `analisi_exp_markdown.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 183.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 240.
  ) 
 Here is how much of TeX's memory you used:
- 18994 strings out of 493089
- 362379 string characters out of 6134842
- 450725 words of memory out of 5000000
- 22019 multiletter control sequences out of 15000+600000
+ 19056 strings out of 493089
+ 364385 string characters out of 6134842
+ 450880 words of memory out of 5000000
+ 22060 multiletter control sequences out of 15000+600000
  19087 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,16n,65p,437b,526s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,16n,65p,437b,514s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2015/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/20
 15/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texlive/2015/texmf-d
 ist/fonts/type1/public/lm/lmss8.pfb>
-Output written on analisi_exp_markdown.pdf (9 pages, 123357 bytes).
+Output written on analisi_exp_markdown.pdf (18 pages, 581939 bytes).
 PDF statistics:
- 201 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
- 19 named destinations out of 1000 (max. 500000)
- 2187 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 341 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 2212 words of extra memory for PDF output out of 10000 (max. 10000000)
 

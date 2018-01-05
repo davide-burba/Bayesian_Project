@@ -1,0 +1,21 @@
+model{
+	for(i in 1:npat){   ## regression model for y  #loop 
+	      mu[2*i-1] <- beta1 + beta2[i]*x[2*i-1] 
+	      mu[2*i] <- beta1 + beta2[i]*x[2*i] 
+	      y[(2*i-1):(2*i)] ~ dmnorm(mu[(2*i-1):(2*i)],tau[,])   # BE CAREFUL, tau is the PRECISION 
+	} 
+	## priors
+  beta1 ~ dnorm(0,.0001)   ## intercept
+	for(i in 1:npat)
+	{ 
+	   beta2[i] ~ dnorm(0,.0001)     ##  random slope
+	}
+	sigma ~ dunif(0,100)      
+	
+	m[1,1]<-1
+	m[1,2]<-0
+	m[2,1]<-0
+	m[2,2]<-1
+	tau[1:2,1:2] <- inverse(sigma*m)     ## convert to precision
+}
+

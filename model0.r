@@ -1,3 +1,9 @@
+
+
+
+load("../R_object/Glaucoma_data.RData")
+
+
 attach(Gdata)
 patients<-factor(Patient)
 a<-table(patients)
@@ -22,6 +28,8 @@ while(iter<1090){
 head(primi)
 
 ################JAGGAMENTO#######################
+library(rjags)
+
 
 data=list(y=primi[,1],x=primi[,2],n=115)
 inits = function() {list(beta=c(0,0),sigma=5)}
@@ -30,11 +38,14 @@ modelRegress=jags.model("data0.bug",data=data,inits=inits,n.adapt=1000,n.chains=
 update(modelRegress,n.iter=19000)
 variable.names=c("beta", "sigma")
 n.iter=50000 
-thin=10
+thin=10 
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
 
 library(coda)
 library(plotrix) 
+outputRegress_mcmc <- as.mcmc(outputRegress)
+x11()
+plot(outputRegress_mcmc)
 
 data.out=as.matrix(outputRegress)
 data.out=data.frame(data.out)
@@ -56,3 +67,4 @@ summary(pippo)
 
 pippo$coefficients
 beta.bayes
+

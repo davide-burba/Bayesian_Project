@@ -8,14 +8,12 @@ setwd("~/Documents/universita/bayesian_statistics-Guglielmi/GLAUCOMA_PROJECT/src
 ##################################################################
 
 
-Gdata=read.table("../data/data.csv", header=T,fill=T,sep=",")
+Gdata=read.csv("../data/data.csv", header=T,fill=T,sep=",")
 dim(Gdata)
 
 attach(Gdata)
-length(unique(Patient)) # 55 pazienti
-length(Patient[Patient==0]) # c'è un' osservazione strana, probabile errore
-Gdata[ Patient==0,] # quasi tutto NA -> rimuoviamola per ora
-Gdata=Gdata[ Patient!=0,]
+length(unique(Patient)) # 115 pazienti
+
 
 
 ##################################################################
