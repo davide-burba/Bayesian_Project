@@ -91,8 +91,13 @@ head(data.out)
 beta.post <- data.out
 beta.bayes  <- apply(beta.post,2,"mean")
 beta2.bayes=beta.bayes[2:103]
-hist(beta2.bayes)
-
+hist(beta2.bayes, breaks=5)
+qplot(beta2.bayes,
+      geom="histogram",
+      binwidth = 20,  
+      fill=I("blue"), 
+      col=I("red"), 
+      alpha=I(.2))
 
 
 
