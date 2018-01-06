@@ -1,4 +1,6 @@
-
+#
+#  RNFL as response of RIM, only the 1st obs considered
+#
 
 
 load("../R_object/Glaucoma_data.RData")

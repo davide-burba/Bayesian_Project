@@ -18,11 +18,11 @@ na.spline(c(1,NA,12,3,NA,NA))
 
 
 # riempi NA di RIM_AREA e RNFL_AVERAGE
-numerosity=table(Patient)
+numerosity=table(Gdata_full$Patient)
 kk=0
 for(i in 1:length(unique(Patient))){
-  RNFL_average[(kk+1):(kk+numerosity[i])]=na.spline(RNFL_average[(kk+1):(kk+numerosity[i])])
-  Rim_area[(kk+1):(kk+numerosity[i])]=na.spline(Rim_area[(kk+1):(kk+numerosity[i])])
+  Gdata_full$RNFL_average[(kk+1):(kk+numerosity[i])]=na.spline(Gdata_full$RNFL_average[(kk+1):(kk+numerosity[i])])
+  Gdata_full$Rim_area[(kk+1):(kk+numerosity[i])]=na.spline(Gdata_full$Rim_area[(kk+1):(kk+numerosity[i])])
   kk=kk+numerosity[i]
 }
 

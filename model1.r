@@ -1,4 +1,11 @@
 
+#
+#  RNFL as response of RIM, only the 1st and 2nd obs considered (fixed intercept, random slope)
+#
+
+
+
+
 rm(list=ls())
 load("../R_object/Glaucoma_data.RData")
 

@@ -1,0 +1,40 @@
+model{
+
+	for(i in 1:npat)
+	{   
+	  for(j in 1:numerosity[i])
+	  {
+	    mu[kk[i]+j]<-x[kk[i]+j]*beta[i]
+	  }
+	      
+	  y[(kk[i]+1):(kk[i]+numerosity[i])] ~ dmnorm(mu[(kk[i]+1):(kk[i]+numerosity[i])],tau[i,1:numerosity[i],1:numerosity[i]]) 
+	      
+	}
+	
+	
+
+	## priors
+	
+	for(i in 1:npat)
+	{ 
+	   beta[i] ~ dnorm(0,.0001)     ##  random slope
+	}
+	sigma ~ dunif(0,100)      
+	
+	for (i in 1:npat)
+	{
+	  for(j in 1:numerosity[i])
+	  {
+	    for(k in 1:numerosity[i])
+	    {
+	      m[i,j,k]=ifelse(j==k,1,0)
+	    }
+	  }
+	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(sigma*m[i,1:numerosity[i],1:numerosity[i]])     
+	}
+	
+	
+	
+	
+}
+
