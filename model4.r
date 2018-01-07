@@ -1,10 +1,10 @@
 #
-#  RNFL as response of several variables, both fixed and random coefficients
+#  mean_RNFL_thikness as response of several variables, both fixed and random coefficients
 #
 
 
 
-# 1st attempt: man/female (fixed) Rim,intercept (random)
+
 
 rm(list=ls())
 load("../R_object/Glaucoma_data_full.RData")
