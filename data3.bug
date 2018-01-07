@@ -1,0 +1,52 @@
+model{
+
+	for(i in 1:npat)
+	{   
+	  for(j in 1:numerosity[i])
+	  {
+	    mu[kk[i]+j]<- b0 + sex[kk[i]+j]*b_sex   +  rim[kk[i]+j]*b_rim[i] 
+	  }
+	      
+	  y[(kk[i]+1):(kk[i]+numerosity[i])] ~ dmnorm(mu[(kk[i]+1):(kk[i]+numerosity[i])],tau[i,1:numerosity[i],1:numerosity[i]]) 
+	      
+	}
+	
+	
+
+	## PRIORS
+	
+	
+	#fixed coef:
+	
+	b0 ~ dnorm(0,.0001)   ## intercept
+	b_sex ~ dnorm(0,.0001)   ##sex
+	
+	
+	#random coef
+	
+	
+	for(i in 1:npat)
+	{ 
+	   b_rim[i] ~ dnorm(0,0.0001)     ##  rim
+	}
+	
+	
+	sigma ~ dunif(0,100)      
+	
+	for (i in 1:npat)
+	{
+	  for(j in 1:numerosity[i])
+	  {
+	    for(k in 1:numerosity[i])
+	    {
+	      m[i,j,k]=ifelse(j==k,1,0)
+	    }
+	  }
+	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(sigma*m[i,1:numerosity[i],1:numerosity[i]])     
+	}
+	
+	
+	
+	
+}
+
