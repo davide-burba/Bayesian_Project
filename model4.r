@@ -149,7 +149,7 @@ ggplot(data.out, aes(data.out$beta.13.))+geom_histogram( binwidth = 1,fill="#366
 ggplot(data.out, aes(data.out$beta.14.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
 
 #Age
-ggplot(data.out, aes(data.out$beta.15.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
+ggplot(data.out, aes(data.out$beta.15.))+geom_histogram( binwidth = 0.1,fill="#366699", col="lightgrey", alpha=I(.8))
 
 #trusopt
 ggplot(data.out, aes(data.out$beta.16.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
