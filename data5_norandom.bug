@@ -1,12 +1,12 @@
 #
-# This file implements a LMM 
+# This file implements a Linear model (only fixed coefficients)
 #
 
 model{
 
 	for(i in 1:npat)
 	{   
-	  mu[(kk[i]+1):(kk[i]+numerosity[i])]<-X[(kk[i]+1):(kk[i]+numerosity[i]),]%*%beta + Z[(kk[i]+1):(kk[i]+numerosity[i]),]%*%b[,i]
+	  mu[(kk[i]+1):(kk[i]+numerosity[i])]<-X[(kk[i]+1):(kk[i]+numerosity[i]),]%*%beta 
 	  y[(kk[i]+1):(kk[i]+numerosity[i])] ~ dmnorm(mu[(kk[i]+1):(kk[i]+numerosity[i])],tau[i,1:numerosity[i],1:numerosity[i]]) 
 	}
 	
@@ -19,15 +19,6 @@ model{
 	
 	sigma1 ~ dunif(0,1000) 
 	beta~ dmnorm(mu0,inverse(sigma1*S0[,]))  #NB: jags wants the inverse of the covariance matrix
-	
-	
-	#random coef:
-	
-	invD ~ dwish(R, p) 
-	for(i in 1:npat)
-	{ 
-	   b[1:nrow_b,i] ~ dmnorm(b0,invD)     #NB: jags wants the inverse of the covariance matrix
-	}
 	
 	
 	#error:

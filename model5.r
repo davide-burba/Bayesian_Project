@@ -1,7 +1,10 @@
 #
-#  RNFL_average as response of several variables, both fixed and random coefficients
-#  1st attempt of covariate selection; note that variables with random coef also has fixed coef
-
+#  RNFL_average as response of several variables, 11 fixed and 6 random coefficients
+#  1st attempt of a "complete" model; serve a fare SELEZIONE COVARIATE RANDOM (a spanne)
+#  
+# NOTE: 1) usata ZELLNER PRIOR, c=10  (per fixed coefficients)!
+#       2) troppe covariate random!
+#       3) intercetta è fixed
 
 
 rm(list=ls())
@@ -33,13 +36,7 @@ X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         age65,               #beta8
         brimonidine,         #beta9
         timolol,             #beta10
-        htnmed               #beta11
-        ,IOP,                #beta12
-        MD,                  #beta13
-        PSD,                 #beta14
-        macular_volume,      #beta15
-        Cup_area,            #beta16
-        Rim_area             #beta17
+        htnmed              #beta11
         )       
 
 #covariates with random coefficents
@@ -54,7 +51,8 @@ Z=cbind(
 
 # Hyperparameters:
 mu0=rep(0, dim(X)[2])
-S0=diag(rep(1, dim(X)[2])) 
+c=10
+S0= c*solve(t(X)%*%X)   #diag(rep(1, dim(X)[2])) 
 b0=rep(0,dim(Z)[2])
 R=diag(rep(1, dim(Z)[2])) 
 p=dim(Z)[2]
@@ -92,72 +90,113 @@ data.out=data.frame(data.out)
 attach(data.out)
 n.chain=dim(data.out)[1] 
 n.chain
-#summary(data.out)
-#head(data.out)
+
+#save.image("../R_object/model_5.RData")
+
+load("../R_object/model_5.RData")
 
 
-########################### PLOTS COEFFICIENTS (POSTERIOR) ##########################
-source ("multiplot.R")
+################ 90 % CI FIXED COEFFICIENTS ################
 
-### FIXED COEFFICIENTS ###
-
-# Intercept
-ggplot(data.out, aes(data.out$beta.1.))+geom_histogram( binwidth = 5,fill="#366699", col="lightgrey", alpha=I(.8))
-
-# Race
-p1=ggplot(data.out, aes(data.out$beta.2.))+geom_histogram( binwidth = 4,fill="#366699", col="lightgrey", alpha=I(.8))+coord_cartesian(xlim = c(-20, 50),ylim=c(0,2000)) 
-p2=ggplot(data.out, aes(data.out$beta.3.))+geom_histogram( binwidth = 4,fill="#366699", col="lightgrey", alpha=I(.8))+coord_cartesian(xlim = c(-20, 50),ylim=c(0,2000))
-multiplot(p1,p2)
-
-#familiarity
-ggplot(data.out, aes(data.out$beta.4.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#Sex
-ggplot(data.out, aes(data.out$beta.5.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#POAG
-ggplot(data.out, aes(data.out$beta.6.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#Hypertension
-ggplot(data.out, aes(data.out$beta.7.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#age65 
-ggplot(data.out, aes(data.out$beta.8.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#brimonidine
-ggplot(data.out, aes(data.out$beta.9.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#timolol
-ggplot(data.out, aes(data.out$beta.10.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#htnmed
-ggplot(data.out, aes(data.out$beta.11.))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#MD
-ggplot(data.out, aes(data.out$beta.12.))+geom_histogram( binwidth = 0.04,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#PSD
-ggplot(data.out, aes(data.out$beta.13.))+geom_histogram( binwidth = 0.04,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#macular_volume
-ggplot(data.out, aes(data.out$beta.14.))+geom_histogram( binwidth = 0.04,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#Cup_area
-ggplot(data.out, aes(data.out$beta.15.))+geom_histogram( binwidth = 0.2,fill="#366699", col="lightgrey", alpha=I(.8))
-
-# Rim_area   
-ggplot(data.out, aes(data.out$beta.12.))+geom_histogram( binwidth = 0.02,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#sigma0
-ggplot(data.out, aes(data.out$sigma0))+geom_histogram( binwidth = 1,fill="#366699", col="lightgrey", alpha=I(.8))
-
-#sigma1
-ggplot(data.out, aes(data.out$sigma1))+geom_histogram( binwidth = 50,fill="#366699", col="lightgrey", alpha=I(.8))
+library(reshape)
+library(ggmcmc)
 
 
+beta=data.out[,grep("beta", names(data.out), fixed=TRUE)]
+names(beta)
+colnames(beta)=names(data.frame(X))
+colnames(beta)[1]="Intercept"
+names(beta)
+tmp=melt(beta)
+head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.beta = apply(beta, 2, quantile, c(0.05, 0.95))  # 90% 
+CI.beta
+
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") # una schifezza!
 
 
-#### RANDOM COEFFICIENTS #####
+################ 90 % CI RANDOM COEFFICIENTS ##################
+
+##### b1 #######
+
+tmp=data.out[,grep("b.1.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+#ggsave('95CI_coefficients_IOP_model4.png', width = 5, height = 6)
+rm(b)
+
+##### b2 #######
+
+tmp=data.out[,grep("b.2.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+rm(b)
+
+
+##### b3 #######
+
+tmp=data.out[,grep("b.3.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+rm(b)
+
+##### b4 #######
+
+tmp=data.out[,grep("b.4.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+rm(b)
+# this (macular volume) is fundamental!
+
+
+##### b5 #######
+
+tmp=data.out[,grep("b.5.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+rm(b)
+
+
+##### b6 #######
+
+tmp=data.out[,grep("b.6.", names(data.out), fixed=TRUE)] #; names(tmp)
+b=tmp
+tmp=melt(b) #;head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95))#; CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+rm(b)
+
+
+
+
+
+
+
+########### BOXPLOT RANDOM COEFFICIENTS ############
 
 #IOP,   b1 
 tmp=stack(as.data.frame(data.out[,grep("b.1.", names(data.out), fixed=TRUE)]))
@@ -187,7 +226,7 @@ ggplot(tmp[,]) +  geom_boxplot(aes(x = ind, y = values))
 
 
 
-# means of coefficients
+########### means of coefficients ###########
 beta.post <- data.out
 beta.bayes  <- apply(beta.post,2,"mean")
 plot(beta.bayes)

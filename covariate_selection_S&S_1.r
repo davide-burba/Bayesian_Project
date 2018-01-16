@@ -1,4 +1,6 @@
-#COVARIATE SELECTION USANDO S&S RELATIVA AL MODELLO 4
+#COVARIATE SELECTION USANDO S&S RELATIVA AL "MODELLO 4"
+# NB:  modello 4 Ã¨ stato modificato!
+
 
 load("../R_object/Glaucoma_better_data.RData")
 attach(mydata)
@@ -56,7 +58,7 @@ ypsilon=L[,dim(L)[2]]
 #SPIKE N SLAB PRIOR
 pr<-SpikeSlabPrior(x=covariates,y=L[,dim(L)[2]],expected.model.size=10,expected.r2 = 0.8)
 #Abbiamo 31 covariate, ho messo come expected.model.size 10 (numero di covariate che ci aspettiamo
-#di ottenere); questo valore è una nostra prior belief ed influisce abbastanza sulle inclusion probabilites
+#di ottenere); questo valore ? una nostra prior belief ed influisce abbastanza sulle inclusion probabilites
 #finali.
 
 model1<-lm.spike(ypsilon~covariates,niter=40000)
@@ -80,7 +82,7 @@ plot(model1, "residuals")
 plot(model1, "size")
 
 #CRITERI PER LA SELEZIONE DELLE COVARIATE:
-#1)Median Probability (seleziono le covariate con probabilità di incidenza >0.5)
+#1)Median Probability (seleziono le covariate con probabilit? di incidenza >0.5)
 coeff1 = summary.lm.spike(model1, burn = 5000)$coefficients
 colnames(coeff1)
 inc_prob1 = coeff1[, 5]

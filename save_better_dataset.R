@@ -213,8 +213,13 @@ library(ggplot2)
 
 p <- ggplot(data = mydata, aes(x = visit2, y = (RNFL_average-BaselineRNFL1)/BaselineRNFL1,  color=factor(Patient) )  )
 p + geom_line() + geom_point() +
-  geom_smooth(method = lm, color="black") +
-  geom_hline(yintercept = -0.08) 
+  #geom_smooth(method = lm, color="black") +
+  #geom_hline(yintercept = -0.08)  +
+  labs(  y="(RNFL_average-baseline)/baseline", x = "Time (Years)")+ theme(legend.position="none")
+
+
+#ggsave('outliar.png', width = 8, height = 4)
+
 
 #evidentemente c'è un paziente "anomalo"; 
 mydata$Patient[(mydata$RNFL_average-mydata$BaselineRNFL1)/mydata$BaselineRNFL1==max((mydata$RNFL_average-mydata$BaselineRNFL1)/mydata$BaselineRNFL1)]
