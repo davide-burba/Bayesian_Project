@@ -9,7 +9,7 @@
 #                 macular_volume, Vert_integrated_rim_area__vol_, Horz_integrated_rim_width__area_,   
 #                 Cup_area, cup_disk_area_ratio, cup_disk_horiz_ratio, cup_disk_vert_ratio
 #
-# Note: - considerati solo pazienti con almeno 6 visite (necessario? comunque sono pochi)
+# Note: - considerati solo pazienti con almeno 4 visite (necessario? comunque sono pochi)
 #       - eliminato paziente 501: valori strani di RNFL (più precisamente di (RNFL-baseline)/baseline)
 
 
@@ -228,8 +228,18 @@ mydata$Patient[(mydata$RNFL_average-mydata$BaselineRNFL1)/mydata$BaselineRNFL1==
 mydata=mydata[mydata$Patient!=501,]
 
 
+# aggiungo variabile log di RNFL e scale di RNFL
 
-mydata$RNFL_average  =as.vector(scale(mydata$RNFL_average))
+RNFL_average_scaled  =as.vector(scale(mydata$RNFL_average))
+RNFL_log= log(mydata$RNFL_average)
+
+plot(RNFL_log)
+plot(RNFL_average_scaled)
+
+mydata=cbind(mydata,RNFL_average_scaled,RNFL_log)
+
+# standardizzo variabili
+
 mydata$Age  =as.vector(scale(mydata$Age))
 mydata$IOP  =as.vector(scale(mydata$IOP))
 mydata$acuity  =as.vector(scale(mydata$acuity))
@@ -248,6 +258,8 @@ mydata$yearofglaucoma  =as.vector(scale(mydata$yearofglaucoma))
 
 
 length(unique(mydata$Patient))
+
+
 
 
 

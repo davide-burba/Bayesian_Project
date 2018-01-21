@@ -1,17 +1,6 @@
 #
 # This file is used to save a more easy-to-use and "correct" dataset; 
-# It also fills some NA values and removes strange observations
-#
-# Added variables: Asian,Black,Hispanic,White, POAG ,familiarity_yes, Meds_according_to_Pt_bool,
-#                  Ocular_Meds_according_to_Pt_bool, BaselineRNFL1
-#
-# Riempiti NA di: RNFL_AVERAGE, RIM_AREA ,IOP, acuity, MD, PSD,  cup_disk_horiz_ratio, cup_disk_vert_ratio,
-#                 macular_volume, Vert_integrated_rim_area__vol_, Horz_integrated_rim_width__area_,   
-#                 Cup_area, cup_disk_area_ratio, cup_disk_horiz_ratio, cup_disk_vert_ratio
-#
-# Note: - considerati solo pazienti con almeno 6 visite (necessario? comunque sono pochi)
-#       - eliminato paziente 501: valori strani di RNFL (più precisamente di (RNFL-baseline)/baseline)
-
+# uguale a "save_better_dataset.R" ma salva pazienti con almeno 6 visite
 
 rm(list=ls())
 
@@ -231,8 +220,18 @@ mydata_6=mydata_6[mydata_6$Patient!=501,]
 
 
 
+# aggiungo variabile log di RNFL e scale di RNFL
+
+RNFL_average_scaled  =as.vector(scale(mydata_6$RNFL_average))
+RNFL_log= log(mydata_6$RNFL_average)
+
+plot(RNFL_log)
+plot(RNFL_average_scaled)
+
+mydata_6=cbind(mydata_6,RNFL_average_scaled,RNFL_log)
 
 
+# standardizzo variabili
 mydata_6$RNFL_average  =as.vector(scale(mydata_6$RNFL_average))
 mydata_6$Age  =as.vector(scale(mydata_6$Age))
 mydata_6$IOP  =as.vector(scale(mydata_6$IOP))
@@ -251,5 +250,6 @@ mydata_6$cup_disk_area_ratio        =as.vector(scale(mydata_6$cup_disk_area_rati
 mydata_6$yearofglaucoma  =as.vector(scale(mydata_6$yearofglaucoma))
 
 
+length(unique(mydata_6$Patient))
 
 save(mydata_6, file="../R_object/Glaucoma_over_6_obs.RData")
