@@ -1,7 +1,7 @@
 #
 #  RNFL_average as response of ALL POSSIBLE COVARIATES, ONLY fixed! 
 #  This file is used to do covariate 
-#  selection; possibly DON'T MODIFY covariates!
+#  selection;
 #
 # NOTE: usata identità come iperparametro  (t(X)%*%X non è invertibile)
 
@@ -80,29 +80,15 @@ beta= rep(0,dim(X)[2])
 inits = function() {list( beta=beta, sigma0=50,sigma1=50)} 
 
 
-modelRegress=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
+modelRegress=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=1)
 update(modelRegress,n.iter=19000)
-variable.names=c("beta", "sigma0","sigma1")
+variable.names=c("beta", "sigma0","sigma1","mu")
 n.iter=50000 
 thin=10 
-
-dic4<-dic.samples(modelRegress,n.iter=20000,thin=10)
 
 library(coda)
 library(plotrix)
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
-
-library(coda) 
-
-# godness of chain
-outputRegress_mcmc <- as.mcmc(outputRegress)
-
-quartz()
-plot(outputRegress_mcmc)
-
-quartz()
-acfplot(outputRegress_mcmc)
-
 
 
 
@@ -114,9 +100,44 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
+tmp=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
+# DIC
+dic4<-dic.samples(tmp,n.iter=20000,thin=10)
+rm(tmp)
+
+# LPML
+#lpml4=...
+
+# RESIDUI BAYESIAN
+#b_res4=...
+
+
 save.image("../R_object/model_4.RData")
+
+
+
+
+
+
+
+
+
+
 rm(list=ls())
 load("../R_object/model_4.RData")
+
+library(coda) 
+library(plotrix)
+
+# godness of chain
+outputRegress_mcmc <- as.mcmc(outputRegress)
+
+quartz()
+plot(outputRegress_mcmc)
+
+quartz()
+acfplot(outputRegress_mcmc)
+
 
 
 

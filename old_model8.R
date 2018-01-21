@@ -126,6 +126,7 @@ p  + geom_vline(xintercept=0, col="orange")
 ####  Credible band for the regression line  ###
 ################################################
 
+library(ggplot2)
 
 hh=c(kk,1046)# patients i has rows from hh[i]+1 to hh[i+1]
 

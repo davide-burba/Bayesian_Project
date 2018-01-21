@@ -22,7 +22,7 @@ for (i in 2:length(unique(Patient))){
   kk[i]=kk[i-1]+numerosity[i-1]
 }
 
-#covariates with fixed coefficents
+
 #covariates with fixed coefficents
 X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Black,               #beta2
@@ -68,7 +68,7 @@ inits = function() {list( beta=beta, sigma0=50,sigma1=50)}
 
 modelRegress=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
 update(modelRegress,n.iter=19000)
-variable.names=c("beta", "sigma0","sigma1")
+variable.names=c("beta", "sigma0","sigma1","mu")
 n.iter=50000 
 thin=10
 
@@ -78,14 +78,7 @@ library(coda)
 library(plotrix)
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
 
-# godness of chain
-outputRegress_mcmc <- as.mcmc(outputRegress)
 
-quartz()
-plot(outputRegress_mcmc)
-
-quartz()
-acfplot(outputRegress_mcmc)
 
 
 
@@ -98,12 +91,36 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
+
+
+# DIC
+dic4<-dic.samples(modelRegress,n.iter=20000,thin=10)
+
+# LPML
+#lpml4=...
+
+# RESIDUI BAYESIAN
+#b_res4=...
+
+
+
+
+
 #save.image("../R_object/model_5.RData")
 rm(list=ls())
 load("../R_object/model_5.RData")
 
 
 
+
+# godness of chain
+outputRegress_mcmc <- as.mcmc(outputRegress)
+
+quartz()
+plot(outputRegress_mcmc)
+
+quartz()
+acfplot(outputRegress_mcmc)
 
 ########################### PLOTS COEFFICIENTS (POSTERIOR) ##########################
 
