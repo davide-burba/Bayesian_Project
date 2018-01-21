@@ -19,13 +19,13 @@ mydata=read.csv("../data/data.csv", header=T,fill=T,sep=",")
 
 
 # Consider only patients with at least 6 visits:
-tmp=unique(mydata$Patient)
-a<-table(mydata$Patient)
-tmp_data=tmp[which(a>=6)] 
-mydata=mydata[mydata$Patient %in% tmp_data,]
-rm(tmp)
-rm(tmp_data)
-rm(a)
+ tmp=unique(mydata$Patient)
+ a<-table(mydata$Patient)
+ tmp_data=tmp[which(a>=4)] 
+ mydata=mydata[mydata$Patient %in% tmp_data,]
+ rm(tmp)
+ rm(tmp_data)
+ rm(a)
 
 
 # Modify Sex covariate: Male=1, Female=0
@@ -155,50 +155,51 @@ rm(tmp)
 numerosity=table(mydata$Patient)
 kk=0
 for(i in 1:length(unique(mydata$Patient))){
-  mydata$RNFL_average[(kk+1):(kk+numerosity[i])]=na.approx(mydata$RNFL_average[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  
   mydata$RNFL_average[(kk+1):(kk+numerosity[i])]=na.fill(mydata$RNFL_average[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$Rim_area[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Rim_area[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$RNFL_average[(kk+1):(kk+numerosity[i])]=na.approx(mydata$RNFL_average[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+ 
   mydata$Rim_area[(kk+1):(kk+numerosity[i])]=na.fill(mydata$Rim_area[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$Rim_area[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Rim_area[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$IOP[(kk+1):(kk+numerosity[i])]=na.approx(mydata$IOP[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$IOP[(kk+1):(kk+numerosity[i])]=na.fill(mydata$IOP[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$IOP[(kk+1):(kk+numerosity[i])]=na.approx(mydata$IOP[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$acuity[(kk+1):(kk+numerosity[i])]=na.approx(mydata$acuity[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$acuity[(kk+1):(kk+numerosity[i])]=na.fill(mydata$acuity[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$acuity[(kk+1):(kk+numerosity[i])]=na.approx(mydata$acuity[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$MD[(kk+1):(kk+numerosity[i])]=na.approx(mydata$MD[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$MD[(kk+1):(kk+numerosity[i])]=na.fill(mydata$MD[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$MD[(kk+1):(kk+numerosity[i])]=na.approx(mydata$MD[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$PSD[(kk+1):(kk+numerosity[i])]=na.approx(mydata$PSD[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$PSD[(kk+1):(kk+numerosity[i])]=na.fill(mydata$PSD[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$PSD[(kk+1):(kk+numerosity[i])]=na.approx(mydata$PSD[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.fill(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
-  mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.fill(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$macular_volume[(kk+1):(kk+numerosity[i])]=na.approx(mydata$macular_volume[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$macular_volume[(kk+1):(kk+numerosity[i])]=na.fill(mydata$macular_volume[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$macular_volume[(kk+1):(kk+numerosity[i])]=na.approx(mydata$macular_volume[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])]=na.fill(mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Vert_integrated_rim_area__vol_[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])]=na.fill(mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$Cup_area[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Cup_area[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Horz_integrated_rim_width__area_[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$Cup_area[(kk+1):(kk+numerosity[i])]=na.fill(mydata$Cup_area[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$Cup_area[(kk+1):(kk+numerosity[i])]=na.approx(mydata$Cup_area[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])]=na.fill(mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_area_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.fill(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],"extend")
-  
-  mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+  mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_horiz_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
+
   mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.fill(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],"extend")
+  mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])]=na.approx(mydata$cup_disk_vert_ratio[(kk+1):(kk+numerosity[i])],na.rm=FALSE)
   
   
   kk=kk+numerosity[i]
@@ -227,6 +228,26 @@ mydata$Patient[(mydata$RNFL_average-mydata$BaselineRNFL1)/mydata$BaselineRNFL1==
 mydata=mydata[mydata$Patient!=501,]
 
 
+
+mydata$RNFL_average  =as.vector(scale(mydata$RNFL_average))
+mydata$Age  =as.vector(scale(mydata$Age))
+mydata$IOP  =as.vector(scale(mydata$IOP))
+mydata$acuity  =as.vector(scale(mydata$acuity))
+mydata$MD  =as.vector(scale(mydata$MD))
+mydata$AGIS_score  =as.vector(scale(mydata$AGIS_score))
+mydata$PSD  =as.vector(scale(mydata$PSD))
+mydata$cup_disk_horiz_ratio  =as.vector(scale(mydata$cup_disk_horiz_ratio))
+mydata$cup_disk_vert_ratio  =as.vector(scale(mydata$cup_disk_vert_ratio))
+mydata$macular_volume  =as.vector(scale(mydata$macular_volume))
+mydata$Vert_integrated_rim_area__vol_  =as.vector(scale(mydata$Vert_integrated_rim_area__vol_))
+mydata$Horz_integrated_rim_width__area_  =as.vector(scale(mydata$Horz_integrated_rim_width__area_))
+mydata$Cup_area     =as.vector(scale(mydata$Cup_area))               
+mydata$Rim_area  =as.vector(scale(mydata$Rim_area))
+mydata$cup_disk_area_ratio        =as.vector(scale(mydata$cup_disk_area_ratio))      
+mydata$yearofglaucoma  =as.vector(scale(mydata$yearofglaucoma))
+
+
+length(unique(mydata$Patient))
 
 
 
