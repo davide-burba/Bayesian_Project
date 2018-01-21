@@ -91,7 +91,16 @@ library(plotrix)
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
 
 library(coda) 
-#
+
+# godness of chain
+outputRegress_mcmc <- as.mcmc(outputRegress)
+
+quartz()
+plot(outputRegress_mcmc)
+
+quartz()
+acfplot(outputRegress_mcmc)
+
 
 
 

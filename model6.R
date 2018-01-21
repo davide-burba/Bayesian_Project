@@ -1,7 +1,10 @@
 #
-#  primo tentativo di covariate selection sulla base di 90% CI model4  
+#  primo tentativo di covariate selection sulla base di 90% CI model5  
 #
 # NOTE:   Zellner prior, only fixed coefficients, c=50
+#
+# We found only 
+
 
 
 rm(list=ls())
@@ -40,11 +43,10 @@ X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         timolol,             #beta13
         IOP,                     #beta14 
         MD,                      #beta15
-        cup_disk_horiz_ratio,    #beta16
-        macular_volume,          #beta17
-        Vert_integrated_rim_area__vol_,     #beta18
-        Horz_integrated_rim_width__area_,   #beta19 
-        Rim_area               #beta20
+        macular_volume,          #beta16
+        Vert_integrated_rim_area__vol_,     #beta17
+        Horz_integrated_rim_width__area_,   #beta18 
+        Rim_area               #beta19
 )
 # Hyperparameters:
 mu0=rep(0, dim(X)[2])
@@ -76,7 +78,7 @@ library(coda)
 library(plotrix)
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
 
-# godness of chain
+
 outputRegress_mcmc <- as.mcmc(outputRegress)
 
 quartz()
@@ -96,9 +98,9 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
-#save.image("../R_object/model_5.RData")
+#save.image("../R_object/model_6.RData")
 rm(list=ls())
-load("../R_object/model_5.RData")
+load("../R_object/model_6.RData")
 
 
 
@@ -159,11 +161,6 @@ pos_neg
 # scale_color_manual(values = levels(pos_neg))
 
 #ggsave('95CI_coefficients.png', width = 8, height = 4)
-
-
-
-
-
 
 
 
