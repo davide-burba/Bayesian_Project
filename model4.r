@@ -90,8 +90,9 @@ library(coda)
 library(plotrix)
 outputRegress=coda.samples(model=modelRegress,variable.names=variable.names,n.iter=n.iter,thin=thin)
 
- 
-#outputRegress_mcmc <- as.mcmc(outputRegress)
+library(coda) 
+#
+
 
 
 data.out=as.matrix(outputRegress)
@@ -105,6 +106,8 @@ n.chain
 #save.image("../R_object/model_4.RData")
 
 load("../R_object/model_4.RData")
+
+
 
 
 ########################### PLOTS COEFFICIENTS (POSTERIOR) ##########################
