@@ -1,4 +1,8 @@
 #
+#   WARNING:  OLD SCRIPT, modello e selezione di covariate trovate senza standardizzare 
+#
+#
+#
 #  RNFL_average as response of several variables, 10 FIXED  and 2 RANDOM coefficients
 #  
 # NB:  ZELLNER PRIOR, c=10 (per fixed coefficients)!

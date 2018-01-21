@@ -25,45 +25,45 @@ for (i in 2:length(unique(Patient))){
 }
 
 #covariates with fixed coefficents
+#covariates with fixed coefficents
 X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Asian,               #beta2
         Black,               #beta3
-        Hispanic,            #beta4
-        White,               #beta5
-        familiarity_yes,     #beta6
-        Sex,                 #beta7
-        POAG,                #beta8
-        Hypertension,        #beta9
-        HyperLipidemia,      #beta10
-        Diabetes,            #beta11
-        Cardiovascular_Dz,   #beta12
-        Smoking,             #beta13
-        age65,               #beta14
-        Age,                 #beta15
-        trusopt,             #beta16
-        prostaglandin,       #beta17
-        brimonidine,         #beta18
-        timolol,             #beta19
-        htnmed,              #beta20
-        IOP,                     #beta21 
-        acuity,                  #beta22
-        MD,                      #beta23
-        PSD,                     #beta24
-        cup_disk_horiz_ratio,    #beta25
-        cup_disk_vert_ratio,     #beta26
-        macular_volume,          #beta27
-        Vert_integrated_rim_area__vol_,     #beta28
-        Horz_integrated_rim_width__area_,   #beta29 
-        Cup_area,                #beta30
-        Rim_area,                #beta31
-        cup_disk_area_ratio      #beta32 
+        Hispanic,            #beta4 
+        #White,               # --> White categoria di riferimento
+        familiarity_yes,     #beta5
+        Sex,                 #beta6
+        POAG,                #beta7
+        Hypertension,        #beta8
+        HyperLipidemia,      #beta9
+        Diabetes,            #beta10
+        Cardiovascular_Dz,   #beta11
+        Smoking,             #beta12
+        age65,               #beta13
+        Age,                 #beta14
+        trusopt,             #beta15
+        prostaglandin,       #beta16
+        brimonidine,         #beta17
+        timolol,             #beta18
+        htnmed,              #beta19
+        IOP,                     #beta20 
+        acuity,                  #beta21
+        MD,                      #beta22
+        PSD,                     #beta23
+        cup_disk_horiz_ratio,    #beta24
+        cup_disk_vert_ratio,     #beta25
+        macular_volume,          #beta26
+        Vert_integrated_rim_area__vol_,     #beta27
+        Horz_integrated_rim_width__area_,   #beta28 
+        Cup_area,                #beta29
+        Rim_area,                #beta30
+        cup_disk_area_ratio      #beta31 
         # yearofglaucoma,      # Troppi NA, bisogna pensare a come trattarli (alcuni pazienti non hanno proprio dati)
-        )       
-
-
+)
 # Hyperparameters:
 mu0=rep(0, dim(X)[2])
-S0=diag(rep(1, dim(X)[2])) # usata identità!  t(X)%*%X non è invertibile!
+c=50
+S0=c*diag(rep(1, dim(X)[2])) # usata identità!  solve(t(X)%*%X) non è invertibile!
 
 
 
@@ -104,7 +104,7 @@ n.chain
 #head(data.out)
 
 #save.image("../R_object/model_4.RData")
-
+rm(list=ls())
 load("../R_object/model_4.RData")
 
 
@@ -150,10 +150,16 @@ pos_neg
 
 p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
 
-#p  #if you don't want colors, use this
+p + geom_vline(xintercept=0, col="orange")   #if you don't want colors, use this
 
-p  +aes(color=pos_neg) + geom_vline(xintercept=0, col="orange") +
-  scale_color_manual(values = levels(pos_neg))
+
+# without intercept
+p=ggs_caterpillar(tmp[which(tmp$Parameter!="Intercept"),], thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p + geom_vline(xintercept=0, col="orange")   
+
+
+#p  +aes(color=pos_neg) + geom_vline(xintercept=0, col="orange") +
+ # scale_color_manual(values = levels(pos_neg))
 
 #ggsave('95CI_coefficients.png', width = 8, height = 4)
 

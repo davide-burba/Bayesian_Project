@@ -1,3 +1,7 @@
+
+#
+#   WARNING:  OLD SCRIPT, modello e selezione di covariate trovate senza standardizzare 
+#
 #
 #  RNFL_average as response of several variables, 13 FIXED coefficients
 #  attempt of covariate selection; a very simple model

@@ -1,7 +1,8 @@
 #
-#  primo tentativo di covariate selection sulla base di 90% CI model4  
+# This model is the same as model 4 but using RNFL scaled come risposta
 #
-# NOTE:   Zellner prior, only fixed coefficients, c=50
+
+
 
 
 rm(list=ls())
@@ -23,38 +24,51 @@ for (i in 2:length(unique(Patient))){
 }
 
 #covariates with fixed coefficents
-#covariates with fixed coefficents
 X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
-        Black,               #beta2
-        Hispanic,            #beta3 
+        Asian,               #beta2
+        Black,               #beta3
+        Hispanic,            #beta4 
         #White,               # --> White categoria di riferimento
-        familiarity_yes,     #beta4
-        Sex,                 #beta5
-        POAG,                #beta6
-        Hypertension,        #beta7
-        HyperLipidemia,      #beta8
-        Cardiovascular_Dz,   #beta9
-        age65,               #beta10
-        prostaglandin,       #beta11
-        brimonidine,         #beta12
-        timolol,             #beta13
-        IOP,                     #beta14 
-        MD,                      #beta15
-        cup_disk_horiz_ratio,    #beta16
-        macular_volume,          #beta17
-        Vert_integrated_rim_area__vol_,     #beta18
-        Horz_integrated_rim_width__area_,   #beta19 
-        Rim_area               #beta20
-)
+        familiarity_yes,     #beta5
+        Sex,                 #beta6
+        POAG,                #beta7
+        Hypertension,        #beta8
+        HyperLipidemia,      #beta9
+        Diabetes,            #beta10
+        Cardiovascular_Dz,   #beta11
+        Smoking,             #beta12
+        age65,               #beta13
+        Age,                 #beta14
+        trusopt,             #beta15
+        prostaglandin,       #beta16
+        brimonidine,         #beta17
+        timolol,             #beta18
+        htnmed,              #beta19
+        IOP,                     #beta20 
+        acuity,                  #beta21
+        MD,                      #beta22
+        PSD,                     #beta23
+        cup_disk_horiz_ratio,    #beta24
+        cup_disk_vert_ratio,     #beta25
+        macular_volume,          #beta26
+        Vert_integrated_rim_area__vol_,     #beta27
+        Horz_integrated_rim_width__area_,   #beta28 
+        Cup_area,                #beta29
+        Rim_area,                #beta30
+        cup_disk_area_ratio      #beta31 
+        # yearofglaucoma,      # Troppi NA, bisogna pensare a come trattarli (alcuni pazienti non hanno proprio dati)
+)       
+
+
 # Hyperparameters:
 mu0=rep(0, dim(X)[2])
 c=50
-S0=c*solve(t(X)%*%X) 
+S0=c*diag(rep(1, dim(X)[2])) # usata identità!  solve(t(X)%*%X) non è invertibile!
 
 
 
 # NO RANDOM
-data=list( y=RNFL_average, X=X,  npat= length(unique(Patient)), 
+data=list( y=mydata$RNFL_average_scaled, X=X,  npat= length(unique(Patient)), 
            mu0=mu0, S0=S0,  numerosity = numerosity, kk=kk)      # dati che passo a jags
 
 
@@ -89,9 +103,10 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
-#save.image("../R_object/model_5.RData")
+#save.image("../R_object/model_4_c.RData")
+
 rm(list=ls())
-load("../R_object/model_5.RData")
+load("../R_object/model_4_c.RData")
 
 
 
@@ -142,7 +157,6 @@ p + geom_vline(xintercept=0, col="orange")   #if you don't want colors, use this
 # without intercept
 p=ggs_caterpillar(tmp[which(tmp$Parameter!="Intercept"),], thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
 p + geom_vline(xintercept=0, col="orange")   
-
 
 #p  +aes(color=pos_neg) + geom_vline(xintercept=0, col="orange") +
 # scale_color_manual(values = levels(pos_neg))
@@ -211,8 +225,4 @@ ggplot(data = melt(beta), aes(x=variable, y=value)) +
   stat_boxplot(aes(fill=variable)) +
   coord_flip()+
   geom_hline(yintercept=0)
-
-
-
-
 

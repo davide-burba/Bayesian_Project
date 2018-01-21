@@ -37,7 +37,7 @@ model{
 	      m[i,j,k]=ifelse(j==k,1,0)
 	    }
 	  }
-	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(sigma0*m[i,1:numerosity[i],1:numerosity[i]])     
+	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(pow(sigma0,2)*m[i,1:numerosity[i],1:numerosity[i]])     
 	}
 	
 	

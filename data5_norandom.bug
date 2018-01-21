@@ -17,13 +17,13 @@ model{
 	
 	#fixed coef:
 	
-	sigma1 ~ dunif(0,1000) 
-	beta~ dmnorm(mu0,inverse(sigma1*S0[,]))  #NB: jags wants the inverse of the covariance matrix
+	sigma1 ~ dunif(0,100) 
+	beta~ dmnorm(mu0,inverse(pow(sigma1,2)*S0[,]))  #NB: jags wants the inverse of the covariance matrix
 	
 	
 	#error:
 
-	sigma0 ~ dunif(0,1000)      
+	sigma0 ~ dunif(0,100)      
 	for (i in 1:npat)
 	{
 	  for(j in 1:numerosity[i])
@@ -33,7 +33,7 @@ model{
 	      m[i,j,k]=ifelse(j==k,1,0)
 	    }
 	  }
-	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(sigma0*m[i,1:numerosity[i],1:numerosity[i]])     
+	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(pow(sigma0,2)*m[i,1:numerosity[i],1:numerosity[i]])     
 	}
 	
 	

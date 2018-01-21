@@ -1,4 +1,8 @@
 #
+#   WARNING:  OLD SCRIPT, modello e selezione di covariate trovate senza standardizzare 
+#
+#
+#
 #  RNFL_average as response of random intercept and time (random coefficients)
 #  
 
