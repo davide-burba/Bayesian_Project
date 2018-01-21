@@ -80,11 +80,13 @@ beta= rep(0,dim(X)[2])
 inits = function() {list( beta=beta, sigma0=50,sigma1=50)} 
 
 
-modelRegress=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=1)
+modelRegress=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
 update(modelRegress,n.iter=19000)
 variable.names=c("beta", "sigma0","sigma1")
 n.iter=50000 
 thin=10 
+
+dic4<-dic.samples(modelRegress,n.iter=20000,thin=10)
 
 library(coda)
 library(plotrix)
@@ -112,7 +114,7 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
-#save.image("../R_object/model_4.RData")
+save.image("../R_object/model_4.RData")
 rm(list=ls())
 load("../R_object/model_4.RData")
 
