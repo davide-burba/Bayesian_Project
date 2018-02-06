@@ -67,9 +67,9 @@ variable.names=c("b0", "b1",  "sigma0", "sigma1","mu")
 n.iter=50000 
 thin=10  
 
-outGLMM_DP=coda.samples(model=LMM_DP_1,variable.names=variable.names,n.iter=n.iter,thin=thin)
+outputRegress=coda.samples(model=LMM_DP_1,variable.names=variable.names,n.iter=n.iter,thin=thin)
 # salvo l'intera catena dei parametri monitorati (si tratta di una lista mcmc)
 
 
-save(outGLMM_DP,file='GLMMDP_output.Rdata')
+save.image("../R_object/MDP_1.RData")
 
