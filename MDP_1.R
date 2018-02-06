@@ -73,3 +73,8 @@ outputRegress=coda.samples(model=LMM_DP_1,variable.names=variable.names,n.iter=n
 
 save.image("../R_object/MDP_1.RData")
 
+
+# TODO: valutazione godness of mcmc, godness of fit (con indici), 
+#      clustering (Binder loss, forse conviene modificare file bugs )
+
+
