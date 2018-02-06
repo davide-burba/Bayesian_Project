@@ -1,0 +1,55 @@
+model{
+
+### Likelihood
+for(i in 1:npat ) 
+{
+    for(j in 1:numerosity[i])
+    {
+      mu[kk[i]+j] <- b0[i]+b1[latent[i]]*visit2[kk[i]+j]
+      y[kk[i]+j] ~ dnorm(mu[kk[i]+j], tau0) 
+    }
+    latent[i] ~ dcat(prob[])    # latent variables: discrete distribution with weights given by prob
+}
+
+# prob ---> p_tilda
+# latent ---> c (or S_j)
+# eta ---> 1/sigma^2
+
+
+### PRIOR finite dimensional approximation of the Dirichlet Process
+### Stick-Breaking construction
+p[1] <- v[1]
+for (j in 2:Kmax) 
+{
+	p[j] <- v[j] * (1 - v[j-1]) * p[j-1]/v[j-1] # v are called beta in the notes
+}
+# Compute the sum of the p[] that we obtained:
+p.sum <- sum(p[])
+for (j in 1:Kmax)
+{
+	b1[j] ~ dnorm(m1, tau2) # tau2 is the precision
+	v[j] ~ dbeta(1, alpha)
+	# To assure that they sum to 1..
+	prob[j] <- p[j] / p.sum
+}
+
+
+
+# PRIOR ON "ERROR"
+
+
+sigma0 ~ dunif(0,100)
+tau0 <- 1/pow(sigma0,2)
+
+
+# PRIOR ON b0[i]
+
+for(i in 1:npat ) 
+{
+  b0[i] ~ dnorm(b_slope, tau1)
+}
+
+tau1 <- 1/pow(sigma1,2)
+sigma1 ~ dunif(0,100) 
+
+}
