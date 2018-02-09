@@ -1,6 +1,6 @@
 model{
 
-### Likelihood
+### LIKELYHOOD
 for(i in 1:npat ) 
 {
     for(j in 1:numerosity[i])
@@ -9,6 +9,7 @@ for(i in 1:npat )
       y[kk[i]+j] ~ dnorm(mu[kk[i]+j], tau0) 
     }
     latent[i] ~ dcat(prob[])    # latent variables: discrete distribution with weights given by prob
+    slope[i]=b1[latent[i]] # I monitor this to do the partition
 }
 
 # prob ---> p_tilda
@@ -51,5 +52,6 @@ for(i in 1:npat )
 
 tau1 <- 1/pow(sigma1,2)
 sigma1 ~ dunif(0,100) 
+
 
 }
