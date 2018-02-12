@@ -113,14 +113,34 @@ load("../R_object/model_5.RData")
 
 
 
-# godness of chain
-outputRegress_mcmc <- as.mcmc(outputRegress)
+#####################
+## GODNESS OF MCMC ##
+#####################
+
+library(coda)        # pacchetto per analizzare catene
+library(plotrix)     # per fare plot CIs
+
+
+
+data=as.matrix(outputRegress) # trasformo il dataframe in matrice 
+data=data.frame(data)
+attach(data)
+n.chain=dim(data)[1]   # lunghezza catena (final sample size)
+
+names(data)
+# let's check the traceplots of random slopes
+outputRegress_mcmc = as.mcmc(data)
 
 quartz()
 plot(outputRegress_mcmc)
 
+# some autocorrelations plots
 quartz()
-acfplot(outputRegress_mcmc)
+acfplot(outputRegress_mcmc) 
+
+
+# mcmc is good (bisognerebbe allargare il supporto di sigma1)
+
 
 ########################### PLOTS COEFFICIENTS (POSTERIOR) ##########################
 

@@ -24,7 +24,7 @@ for (i in 2:length(unique(Patient))){
   kk[i]=kk[i-1]+numerosity[i-1]
 }
 
-#covariates with fixed coefficents
+
 #covariates with fixed coefficents
 X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Asian,               #beta2
@@ -100,16 +100,11 @@ n.chain
 #summary(data.out)
 #head(data.out)
 
-tmp=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
+#tmp=jags.model("data5_norandom.bug",data=data,inits=inits,n.adapt=1000,n.chains=2)
 # DIC
-dic4<-dic.samples(tmp,n.iter=20000,thin=10)
-rm(tmp)
+#dic4<-dic.samples(tmp,n.iter=20000,thin=10)
+#rm(tmp)
 
-# LPML
-#lpml4=...
-
-# RESIDUI BAYESIAN
-#b_res4=...
 
 
 save.image("../R_object/model_4.RData")
@@ -126,17 +121,51 @@ save.image("../R_object/model_4.RData")
 rm(list=ls())
 load("../R_object/model_4.RData")
 
-library(coda) 
-library(plotrix)
 
-# godness of chain
-outputRegress_mcmc <- as.mcmc(outputRegress)
+
+
+
+#####################
+## GODNESS OF MCMC ##
+#####################
+
+library(coda)        # pacchetto per analizzare catene
+library(plotrix)     # per fare plot CIs
+
+
+
+data=as.matrix(outputRegress) # trasformo il dataframe in matrice 
+data=data.frame(data)
+attach(data)
+n.chain=dim(data)[1]   # lunghezza catena (final sample size)
+
+names(data)
+# let's check the traceplots of random slopes
+outputRegress_mcmc = as.mcmc(data[,grep("beta.", names(data), fixed=TRUE)])
 
 quartz()
 plot(outputRegress_mcmc)
 
+# some autocorrelations plots
+quartz()
+acfplot(outputRegress_mcmc[,1:10]) 
+acfplot(outputRegress_mcmc[,11:20])
+acfplot(outputRegress_mcmc[,21:31])
+
+
+# let's check the traceplots of others
+outputRegress_mcmc = as.mcmc(data[,grep("sigma", names(data), fixed=TRUE)])
+quartz()
+plot(outputRegress_mcmc)
+
+#autocorrelation
 quartz()
 acfplot(outputRegress_mcmc)
+
+
+
+# mcmc is good
+
 
 
 
@@ -257,6 +286,40 @@ ggplot(data = melt(beta), aes(x=variable, y=value)) +
   stat_boxplot(aes(fill=variable)) +
   coord_flip()+
   geom_hline(yintercept=0)
+
+
+
+################################
+####### GOODNESS OF FIT ########
+################################
+
+
+############# RESIDUI BAYESIANI #############
+mu=data[,grep("mu", names(data), fixed=TRUE)]
+pred.mean=apply(mu,2,mean)
+pred.sd=apply(mu,2,sd)
+
+bres= (pred.mean- RNFL_average)/pred.sd   # residui bayesiani
+out2 = (abs(bres) > 2) #as a reference value we take 2, (or 1.8)
+
+length(which(out2==TRUE))
+
+# Predictive goodness-of-fit: SUM (or MEAN) of the predictive Bayesian residuals
+# to compare different models 
+# The "best" model is the one with the smallest value for this index
+MEAN.RES.BAYES=mean(bres^2)
+MEAN.RES.BAYES
+MEDIAN.RES.BAYES=median(bres^2)
+MEDIAN.RES.BAYES
+
+plot(sort(bres^2)) # ce n'è qualcuno assurdo, che alza la media
+
+
+## CROSS VALIDATION -> per ora saltata
+
+
+# BIC & AIC (using the means of coefficients as summary of posterior)
+#-> per ora saltata ... modello solo per covariate sel., forse non serve
 
 
 

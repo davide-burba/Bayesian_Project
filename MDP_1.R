@@ -1,7 +1,7 @@
 #
 # Primo tentativo di mixture di modello di Dirichlet processes: clustering di pazienti
 #
-# MODEL: RNFL_i = alpha_i + beta_i*time_i
+# MODEL: RNFL_ij = alpha_i + beta_i*time_ij
 #
 # alpha_i ~ dnorm
 # beta_i |P ~ P
@@ -80,9 +80,9 @@ load("../R_object/MDP_1.RData")
 
 
 
-####################
-## GODNESS OF FIT ##
-####################
+#####################
+## GODNESS OF MCMC ##
+#####################
 
 library(coda)        # pacchetto per analizzare catene
 library(plotrix)     # per fare plot CIs

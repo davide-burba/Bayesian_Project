@@ -17,11 +17,12 @@ model{
 	
 	#fixed coef:
 	
-	sigma1 ~ dunif(0,100) 
+	sigma1 ~ dunif(0,300) 
 	beta~ dmnorm(mu0,inverse(pow(sigma1,2)*S0[,]))  #NB: jags wants the inverse of the covariance matrix
 	
 	
 	#random coef:
+	
 	
 	invD ~ dwish(R, p) 
 	for(i in 1:npat)

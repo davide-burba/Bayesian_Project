@@ -1,0 +1,72 @@
+#
+# This file implements a LMM 
+#
+
+model{
+
+## LIKELYHOOD
+
+	for(i in 1:npat)
+	{   
+	  mu[(kk[i]+1):(kk[i]+numerosity[i])]<-X[(kk[i]+1):(kk[i]+numerosity[i]),]%*%beta + Z[(kk[i]+1):(kk[i]+numerosity[i]),]%*%b[,i]
+	  
+	  y[(kk[i]+1):(kk[i]+numerosity[i])] ~ dmnorm(mu[(kk[i]+1):(kk[i]+numerosity[i])],tau[i,1:numerosity[i],1:numerosity[i]]) 
+	  
+	  
+	  latent[i] ~ dcat(prob[])    # latent variables: discrete distribution with weights given by prob
+    b[1,i]=b1[latent[i]] # I monitor this to do the partition
+    b[2,i]=b2[latent[i]] # I monitor this to do the partition
+	}
+	
+	
+	
+	
+
+	
+	
+	
+	### PRIOR finite dimensional approximation of the Dirichlet Process
+### Stick-Breaking construction
+p[1] <- v[1]
+for (j in 2:Kmax) 
+{
+	p[j] <- v[j] * (1 - v[j-1]) * p[j-1]/v[j-1] # v are called beta in the notes
+}
+# Compute the sum of the p[] that we obtained:
+p.sum <- sum(p[])
+for (j in 1:Kmax)
+{
+	b1[j] ~ dnorm(m1, tau2) # tau2 is the precision
+	b2[j] ~ dnorm(m1, tau2) 
+	v[j] ~ dbeta(1, alpha)
+	# To assure that they sum to 1..
+	prob[j] <- p[j] / p.sum
+}
+
+	
+	#fixed coef:
+	
+	sigma1 ~ dunif(0,300) 
+	beta~ dmnorm(mu0,inverse(pow(sigma1,2)*S0[,]))  #NB: jags wants the inverse of the covariance matrix
+	
+	
+	#error:
+
+	sigma0 ~ dunif(0,100)      
+	for (i in 1:npat)
+	{
+	  for(j in 1:numerosity[i])
+	  {
+	    for(k in 1:numerosity[i])
+	    {
+	      m[i,j,k]=ifelse(j==k,1,0)
+	    }
+	  }
+	  tau[i,1:numerosity[i],1:numerosity[i]] <- inverse(pow(sigma0,2)*m[i,1:numerosity[i],1:numerosity[i]])     
+	}
+	
+	
+	
+	
+}
+

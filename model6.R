@@ -25,7 +25,7 @@ for (i in 2:length(unique(Patient))){
   kk[i]=kk[i-1]+numerosity[i-1]
 }
 
-#covariates with fixed coefficents
+
 #covariates with fixed coefficents
 X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Black,               #beta2
@@ -47,6 +47,7 @@ X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Vert_integrated_rim_area__vol_,     #beta17
         Horz_integrated_rim_width__area_,   #beta18 
         Rim_area               #beta19
+        
 )
 # Hyperparameters:
 mu0=rep(0, dim(X)[2])
@@ -84,33 +85,50 @@ data.out=data.frame(data.out)
 attach(data.out)
 n.chain=dim(data.out)[1] 
 n.chain
-#summary(data.out)
-#head(data.out)
 
-# DIC
-dic4<-dic.samples(modelRegress,n.iter=20000,thin=10)
 
-# LPML
-#lpml4=...
-
-# RESIDUI BAYESIAN
-#b_res4=...
-
-#save.image("../R_object/model_6.RData")
+save.image("../R_object/model_6.RData")
 rm(list=ls())
 load("../R_object/model_6.RData")
 
 
 
-library(coda)
-library(plotrix)
-outputRegress_mcmc <- as.mcmc(outputRegress)
+
+#####################
+## GODNESS OF MCMC ##
+#####################
+
+library(coda)        # pacchetto per analizzare catene
+library(plotrix)     # per fare plot CIs
+
+
+
+data=as.matrix(outputRegress) # trasformo il dataframe in matrice 
+data=data.frame(data)
+attach(data)
+n.chain=dim(data)[1]   # lunghezza catena (final sample size)
+
+names(data)
+# let's check the traceplots of random slopes
+outputRegress_mcmc = as.mcmc(data[,grep("beta.", names(data), fixed=TRUE)])
 
 quartz()
 plot(outputRegress_mcmc)
 
+# some autocorrelations plots
+quartz()
+acfplot(outputRegress_mcmc) 
+
+# let's check the traceplots of others
+outputRegress_mcmc = as.mcmc(data[,grep("sigma", names(data), fixed=TRUE)])
+quartz()
+plot(outputRegress_mcmc)
+
+#autocorrelation
 quartz()
 acfplot(outputRegress_mcmc)
+
+#mcmc is good
 
 
 
@@ -171,6 +189,93 @@ pos_neg
 # scale_color_manual(values = levels(pos_neg))
 
 #ggsave('95CI_coefficients.png', width = 8, height = 4)
+
+
+################################
+####### GOODNESS OF FIT ########
+################################
+
+
+############# RESIDUI BAYESIANI #############
+mu=data[,grep("mu", names(data), fixed=TRUE)]
+pred.mean=apply(mu,2,mean)
+pred.sd=apply(mu,2,sd)
+
+bres= (pred.mean- RNFL_average)/pred.sd   # residui bayesiani
+out2 = (abs(bres) > 2) #as a reference value we take 2, (or 1.8)
+
+length(which(out2==TRUE))
+
+# Predictive goodness-of-fit: SUM (or MEAN) of the predictive Bayesian residuals
+# to compare different models 
+# The "best" model is the one with the smallest value for this index
+MEAN.RES.BAYES=mean(bres^2)
+MEAN.RES.BAYES
+MEDIAN.RES.BAYES=median(bres^2)
+MEDIAN.RES.BAYES
+
+plot(sort(bres^2)) # ce n'è qualcuno assurdo, che alza la media
+
+
+## CROSS VALIDATION
+
+# es CPOi togliendo seconda visita del primo paziente
+beta= data[,grep("beta", names(data), fixed=TRUE)]
+tmp=X%*%t(beta)
+pred= tmp[2,]
+1/mean(1/dnorm(RNFL_average[2], pred , data[,grep("sigma0", names(data), fixed=TRUE)])) 
+# predizione vs valore reale
+mean(pred)
+RNFL_average[2]
+
+
+#calcolo LPML
+n=dim(mydata)[1]
+n
+cpo=seq(1,n)
+tmp=X%*%t(beta)
+mcmc.std.dev=data[,grep("sigma0", names(data), fixed=TRUE)]
+
+for (i in 1:n){
+  pred=tmp[i,]
+  cpo[i]=1/mean(1/dnorm(RNFL_average[i], pred , mcmc.std.dev))
+}
+
+LPML=sum(log(cpo))
+LPML
+sum(cpo)
+median(cpo)
+mean(cpo)
+min(cpo)
+
+# BIC & AIC (using the means of coefficients as summary of posterior)
+n=dim(mydata)[1]
+first.b0.pos=which(names(data)=="b0.1.")
+first.slope.pos=which(names(data)=="slope.1.")
+mcmc.std.dev=data[,grep("sigma0", names(data), fixed=TRUE)]
+tmp=X%*%t(beta)
+pred=colMeans(t(tmp))
+sigma.hat=mean(data[,grep("sigma0", names(data), fixed=TRUE)])
+loglik=0
+for (k in 1:n){
+  loglik=loglik+dnorm(RNFL_average[k],mean=pred[k], sd =sigma.hat , log=TRUE)
+}
+
+# loglikelyhood:
+loglik
+
+# r is the number of parameters
+r=19
+
+#AIC
+AIC=2*loglik-2*r
+AIC
+
+#BIC
+BIC=2*loglik-r*log(n)
+BIC
+
+
 
 
 
