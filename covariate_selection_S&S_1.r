@@ -43,7 +43,8 @@ b=cbind(
   Horz_integrated_rim_width__area_,   #b9 
   Cup_area,                #b10
   Rim_area,                #b11
-  cup_disk_area_ratio      #b12 
+  cup_disk_area_ratio,      #b12 
+  visit2
 )
 
 W=cbind(a,b)
@@ -69,7 +70,7 @@ beta = model1$beta
 dim(beta)
 beta.mcmc = as.mcmc(beta)
 x11()
-plot(beta.mcmc, ask = T)
+#plot(beta.mcmc, ask = T)
 
 res = residuals(model1)
 dim(res)
