@@ -56,7 +56,7 @@ b0=rep(0,dim(Z)[2])
 R=diag(rep(1, dim(Z)[2])) 
 #p=dim(Z)[2]
 #p=100
-p=100
+p=30
 
 data=list( y=RNFL_average, X=X, Z=Z, npat= length(unique(Patient)), nrow_b=dim(Z)[2], 
            mu0=mu0, S0=S0, b0=b0, R=R, p=p, numerosity = numerosity, kk=kk)      # dati che passo a jags
@@ -310,6 +310,12 @@ bres= (pred.mean- RNFL_average)/pred.sd   # residui bayesiani
 out2 = (abs(bres) > 2) #as a reference value we take 2, (or 1.8)
 
 length(which(out2==TRUE))
+
+error=abs(pred.mean- RNFL_average)
+mean.error=mean(error)
+mean(error)
+median.error=median(error)
+median.error
 
 # Predictive goodness-of-fit: SUM (or MEAN) of the predictive Bayesian residuals
 # to compare different models 

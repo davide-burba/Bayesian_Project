@@ -203,7 +203,7 @@ p   + geom_vline(xintercept=0, col="orange")
 ##################### 90% CI RANDOM COEFFICIENTS #####################
 
 # 90% CI random coefficients: random intercept
-tmp=data.out[,grep("b.1.", names(data.out), fixed=TRUE)]
+tmp=data.out[,grep("b.1", names(data.out), fixed=TRUE)]
 names(tmp)
 b=tmp
 tmp=melt(b)
@@ -314,6 +314,11 @@ bres= (pred.mean- RNFL_average)/pred.sd   # residui bayesiani
 out2 = (abs(bres) > 2) #as a reference value we take 2, (or 1.8)
 
 length(which(out2==TRUE))
+error=abs(pred.mean- RNFL_average)
+mean.error=mean(error)
+mean(error)
+median.error=median(error)
+median.error
 
 # Predictive goodness-of-fit: SUM (or MEAN) of the predictive Bayesian residuals
 # to compare different models 

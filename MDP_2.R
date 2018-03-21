@@ -7,9 +7,10 @@
 # beta_i |P ~ P
 # P ~ DP
 #
-# alpha=0.7
-# n.iter=50000 
-# thin=10  
+# alpha=0.5
+# n.iter=200000 
+# thin=40  
+#
 
 rm(list=ls())
 load("../R_object/Glaucoma_better_data.RData")
@@ -39,7 +40,7 @@ Kmax=40 # troncamento serie Sethuraman
 
 #  genero una lista con i dati da passare a JAGS (tra cui IPERPARAMETRI)
 data <- list(y=RNFL_average, visit2=visit2, npat=npat, numerosity = numerosity, kk=kk, 
-             b_slope=0,m1=0, Kmax=Kmax, alpha = 0.7,  tau2 = 0.01 )
+             b_slope=0,m1=0, Kmax=Kmax, alpha = 0.5,  tau2 = 0.01 )
 
 ###########  
 # definisco una lista con lo stato iniziale della catena
@@ -68,17 +69,17 @@ update(LMM_DP_1,19000)
 # Monitoro i parametri: 
 variable.names=c("b0", "slope", "sigma0", "sigma1","mu")
 
-n.iter=50000 
-thin=10  
+n.iter=200000 
+thin=40  
 
 outputRegress=coda.samples(model=LMM_DP_1,variable.names=variable.names,n.iter=n.iter,thin=thin)
 # salvo l'intera catena dei parametri monitorati (si tratta di una lista mcmc)
 
 
-save.image("../R_object/MDP_1.RData")
+save.image("../R_object/MDP_2.RData")
 
 
-load("../R_object/MDP_1.RData")
+load("../R_object/MDP_2.RData")
 
 
 
@@ -101,13 +102,13 @@ n.chain=dim(data)[1]   # lunghezza catena (final sample size)
 outputRegress_mcmc = as.mcmc(data[,grep("slope", names(data), fixed=TRUE)])
 
 quartz()
-plot(outputRegress_mcmc)
+plot(outputRegress_mcmc[,1:2])
 
 # some autocorrelations plots
 quartz()
-acfplot(outputRegress_mcmc[,1:10]) # increment lag!
+acfplot(outputRegress_mcmc[,2:5]) # increment lag!
 acfplot(outputRegress_mcmc[,11:20])
-acfplot(outputRegress_mcmc[,90:100])
+acfplot(outputRegress_mcmc[,60:63])
 
 # let's check the traceplots of random intercept
 outputRegress_mcmc = as.mcmc(data[,grep("b0", names(data), fixed=TRUE)])
@@ -129,6 +130,39 @@ plot(outputRegress_mcmc)
 #autocorrelation
 quartz()
 acfplot(outputRegress_mcmc)
+
+##################### 90% CI RANDOM COEFFICIENTS #####################
+library(ggplot2)
+library(ggmcmc)
+library(reshape)
+
+# 90% CI random coefficients: random intercept
+tmp=data[,grep("b0", names(data), fixed=TRUE)]
+names(tmp)
+b=tmp
+tmp=melt(b)
+head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95)) 
+CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+#ggsave('95CI_coefficients_intercept.png', width = 5, height = 6)
+
+# 90% CI random coefficients
+tmp=data[,grep("slope", names(data), fixed=TRUE)]
+names(tmp)
+b=tmp
+tmp=melt(b)
+head(tmp)
+colnames(tmp) = c("Parameter", "value")
+CI.b = apply(b, 2, quantile, c(0.05, 0.95)) 
+CI.b
+p=ggs_caterpillar(tmp, thick_ci = c(0.05, 0.95), thin_ci = c(0.025, 0.975))
+p  + geom_vline(xintercept=0, col="orange") 
+
+
+
 
 
 ################################
@@ -256,7 +290,7 @@ pihat <- pihat/G # pihat is the similarity matrix
 
 #####Binder loss function
 FF <- vector("numeric")
-K <- 0.7 #prova con K=0.5, >=0.7
+K <- 0.5 #prova con K=0.5, >=0.7
 for(i in 1:G){
   ss <- label.mat[i,] 
   cij <- outer(ss,ss,'==')
@@ -265,7 +299,7 @@ for(i in 1:G){
   FF[i] <- sum(pluto)
 }
 
-plot(FF, type="l")
+#plot(FF, type="l")
 
 # seleziono come stima dei cluster l'iterazione che minimizza la binder loss
 ind.bind <- which.max(FF)[1] 
@@ -291,13 +325,13 @@ table(sort(ll.bind))
 # ad esempio se rispecchiano divisione fatta con classificatore naive 
 # (variabile ProgressionStructure all'ultima visita) 
 
-# handy_patient=Patient 
-# for (i in 1:npat){
-#   for(j in 1:numerosity[i])
-#   {
-#     handy_patient[kk[i]+j]=i
-#   }
-# }
+ handy_patient=Patient 
+ for (i in 1:npat){
+   for(j in 1:numerosity[i])
+   {
+     handy_patient[kk[i]+j]=i
+   }
+ }
 # handy_patient # pazienti con ID da 1 a 104, più facili da maneggiare
 
 
@@ -317,6 +351,11 @@ tmp=which(ll.bind==unici[1])
 progcl1=prog[tmp]
 mean(progcl1)*100 
 progcl1
+ind.cl1=which(handy_patient %in%tmp)
+ind.cl1
+unique(Sex[ind.cl1])
+Race[ind.cl1]
+
 
 # cluster 2
 unici[2]
@@ -333,6 +372,7 @@ mean(progcl3)*100 # tutti progrediti
 progcl3
 
 # cluster 4
+unici[4]
 tmp=which(ll.bind==unici[4])
 progcl4=prog[tmp]
 mean(progcl4)*100 #
@@ -344,3 +384,5 @@ tmp=which(ll.bind==unici[5])
 progcl5=prog[tmp]
 mean(progcl5)*100 #
 progcl5
+
+

@@ -1,11 +1,6 @@
 #
-#  Best linear model with only fixed coefficients
+# fixed covariates according to spyke and slab
 #
-# NOTE:   Zellner prior, only fixed coefficients, c=50
-#
-# We found only 
-
-
 
 rm(list=ls())
 load("../R_object/Glaucoma_better_data.RData")
@@ -31,22 +26,23 @@ X=cbind(rep(1,length(Patient)),  #beta1 (intercept)
         Black,               #beta2
         Hispanic,            #beta3 
         #White,               # --> White categoria di riferimento
-        familiarity_yes,     #beta4
+        #familiarity_yes,     #beta4
         Sex,                 #beta5
-        POAG,                #beta6
-        Hypertension,        #beta7
-        HyperLipidemia,      #beta8
+        #POAG,                #beta6
+        #Hypertension,        #beta7
+        #HyperLipidemia,      #beta8
         Cardiovascular_Dz,   #beta9
         age65,               #beta10
-        prostaglandin,       #beta11
-        brimonidine,         #beta12
+        #prostaglandin,       #beta11
+        #brimonidine,         #beta12
         timolol,             #beta13
-        IOP,                     #beta14 
+        #IOP,                     #beta14 
         MD,                      #beta15
         macular_volume,          #beta16
         Vert_integrated_rim_area__vol_,     #beta17
         Horz_integrated_rim_width__area_,   #beta18 
         Rim_area               #beta19
+       
         
 )
 # Hyperparameters:
@@ -87,9 +83,9 @@ n.chain=dim(data.out)[1]
 n.chain
 
 
-save.image("../R_object/model_6.RData")
+save.image("../R_object/model_sp_sl.RData")
 rm(list=ls())
-load("../R_object/model_6.RData")
+load("../R_object/model_sp_sl.RData")
 
 
 

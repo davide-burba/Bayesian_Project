@@ -228,7 +228,8 @@ mydata$Patient[(mydata$RNFL_average-mydata$BaselineRNFL1)/mydata$BaselineRNFL1==
 mydata=mydata[mydata$Patient!=501,]
 
 
-# aggiungo variabile log di RNFL e scale di RNFL
+# aggiungo variabile log di RNFL e scale di RNFL 
+#(ma nei modelli uso RNFL non modificato come risposta!)
 
 RNFL_average_scaled  =as.vector(scale(mydata$RNFL_average))
 RNFL_log= log(mydata$RNFL_average)

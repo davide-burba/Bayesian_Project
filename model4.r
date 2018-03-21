@@ -179,7 +179,7 @@ acfplot(outputRegress_mcmc)
 library(reshape)
 library(ggmcmc)
 
-n=32 # number of betas
+n=31 # number of betas
 names(data.out)
 beta=data.out[,grep("beta", names(data.out), fixed=TRUE)]
 names(beta)
@@ -219,8 +219,10 @@ p=ggs_caterpillar(tmp[which(tmp$Parameter!="Intercept"),], thick_ci = c(0.05, 0.
 p + geom_vline(xintercept=0, col="orange")   
 
 
-#p  +aes(color=pos_neg) + geom_vline(xintercept=0, col="orange") +
- # scale_color_manual(values = levels(pos_neg))
+pos_neg=pos_neg[-1]
+length(pos_neg)
+p  +aes(color=pos_neg) + geom_vline(xintercept=0, col="orange") +
+  scale_color_manual(values = levels(pos_neg))
 
 #ggsave('95CI_coefficients.png', width = 8, height = 4)
 
@@ -315,11 +317,6 @@ MEDIAN.RES.BAYES
 plot(sort(bres^2)) # ce n'è qualcuno assurdo, che alza la media
 
 
-## CROSS VALIDATION -> per ora saltata
-
-
-# BIC & AIC (using the means of coefficients as summary of posterior)
-#-> per ora saltata ... modello solo per covariate sel., forse non serve
 
 
 
